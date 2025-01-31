@@ -1,7 +1,6 @@
 import LAside from "@/components/LAside";
 import Main from "@/components/Main";
 import RAside from "@/components/RAside";
-import Image from "next/image";
 
 export default function Home() {
   return (
