@@ -58,8 +58,8 @@ const Main = ({ setToggle, toggle }: MainProps) => {
             Dashboard /<span className="text-black">Default</span>
           </span>
         </div>
-        <div className="second-item-container flex items-center justify-center gap-3">
-          <div className="search-input hidden mr-[4rem] px-[.8rem] bg-gray-100 h-[2.5rem] rounded-[6px] md:flex items-center w-full">
+        <div className="second-item-container  hidden md:flex items-center justify-center gap-3">
+          <div className="search-input mr-[4rem] px-[.8rem] bg-gray-100 h-[2.5rem] rounded-[6px] flex items-center w-full">
             <div className="image-container">
               <Image
                 src={"/search.svg"}
@@ -89,28 +89,24 @@ const Main = ({ setToggle, toggle }: MainProps) => {
               alt="toggle-button-icon"
               width={25}
               height={25}
-              className="block"
             />
             <Image
               src={"/timer.svg"}
               alt="search-icon"
               width={25}
               height={25}
-              className="md:block hidden"
             />
             <Image
               src={"/notifications.svg"}
               alt="notification toggle-icon"
               width={20}
               height={20}
-              className="md:block hidden"
             />
             <Image
               src={"/book.svg"}
               alt="svg-component"
               width={30}
               height={30}
-              className="hidden md:block"
             />
           </div>
         </div>
@@ -136,7 +132,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           {itemsArray.map((item) => (
             <div
               key={item.name}
-              className={`card-item md:px-[2rem] px-[1.4rem] py-[2.5rem] md:w-[19rem] w-full ${item.color} rounded-[7px]`}
+              className={`card-item md:px-[2rem] px-[1.4rem] py-[3rem] md:w-[17rem] w-full ${item.color} rounded-[7px]`}
             >
               <span className="block mb-[.8rem] text-[1rem] text-black">
                 {item.name}
