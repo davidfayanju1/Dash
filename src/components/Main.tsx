@@ -128,11 +128,12 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           </div>
         </section>
 
-        <section className="cards-container flex-wrap mt-[2rem] w-full flex items-start justify-start gap-3 md:flex-row flex-col">
+        <section className="cards-container flex-wrap mt-[2rem] w-full flex items-start justify-between gap-3 md:flex-row flex-col">
           {itemsArray.map((item) => (
             <div
               key={item.name}
-              className={`card-item md:px-[2rem] px-[1.4rem] py-[3rem] md:w-[17rem] w-full ${item.color} rounded-[7px]`}
+              className={`card-item md:px-[2rem] px-[1.4rem] py-[3rem] ${item.color} rounded-[7px]`}
+              style={{ flex: "1 1 250px", minWidth: "250px", width: "100%" }} // Full width on mobile, individual width on larger screens
             >
               <span className="block mb-[.8rem] text-[1rem] text-black">
                 {item.name}
