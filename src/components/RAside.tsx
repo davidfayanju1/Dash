@@ -122,8 +122,8 @@ const RAside = () => {
             <div
               key={item.name}
               className={`card-container ${
-                item.icon && item.iconII ? "" : "pl-[1.4rem]"
-              } cursor-pointer flex items-start justify-start mb-3 gap-2`}
+                item.icon && item.iconII ? "" : "pl-[2.5rem]"
+              } cursor-pointer flex items-start justify-start mb-5 gap-2`}
             >
               {item.iconII && (
                 <Image
