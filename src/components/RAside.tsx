@@ -11,8 +11,47 @@ const RAside = () => {
       name: "Listings",
     },
   ];
+
+  const dashboards = [
+    {
+      name: "Overview",
+      icon: "/dashoverview.svg",
+      active: true,
+    },
+
+    {
+      name: "User Mgmt",
+      icon: "/usermgt.svg",
+      active: false,
+    },
+    {
+      name: "Listings",
+      icon: "/listings.svg",
+      active: false,
+    },
+  ];
+
+  const reports = [
+    {
+      name: "Flagged",
+      icon: "/flagged.svg",
+      iconII: "/arrowright.svg",
+    },
+    {
+      name: "Listings",
+    },
+    {
+      name: "Users",
+    },
+    {
+      name: "Messages",
+    },
+    {
+      name: "Flagged",
+    },
+  ];
   return (
-    <div className="w-full md:px-[2rem] px-[1rem] h-full bg-white border-r-[1px] border-gray-200">
+    <div className="w-full pb-[4rem] md:px-[2rem] px-[1rem] bg-white min-h-screen border-r-[1px] border-gray-200">
       <section className="logo-container py-[1.4rem] flex items-center gap-3">
         <Image
           className="object-cover rounded-full"
@@ -44,10 +83,74 @@ const RAside = () => {
         ))}
       </section>
 
-      <section className="dashboard">
-        <span className="title font-semibold text-[1.3rem] text-black">
-          Dashboard
-        </span>
+      <section className="dashboard mb-[2rem]">
+        <span className="title text-[1rem] text-black/40">Dashboards</span>
+        <div className="cards-container mt-4">
+          {dashboards.map((item) => (
+            <div
+              key={item.name}
+              className={`card-container ${
+                item.active === true
+                  ? "bg-gray-200 px-8 py-2 rounded-[9px]"
+                  : ""
+              } cursor-pointer flex items-start justify-start mb-3 gap-2`}
+            >
+              {!item.active && (
+                <Image
+                  src={"/arrowright.svg"}
+                  alt={item.name}
+                  width={25}
+                  height={30}
+                />
+              )}
+
+              <div className="link-container flex items-center gap-2">
+                <Image src={item.icon} alt={item.name} width={30} height={30} />
+                <span className="block text-black transition-all ease-in-out delay-75 hover:translate-x-2">
+                  {item.name}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="reports">
+        <span className="title text-[1rem] text-black/40">Reports</span>
+        <div className="cards-container mt-4">
+          {reports.map((item) => (
+            <div
+              key={item.name}
+              className={`card-container ${
+                item.icon && item.iconII ? "" : "pl-[1.4rem]"
+              } cursor-pointer flex items-start justify-start mb-3 gap-2`}
+            >
+              {item.iconII && (
+                <Image
+                  src={item.iconII}
+                  alt={item.name}
+                  width={25}
+                  height={30}
+                />
+              )}
+
+              <div className="link-container flex items-center gap-2">
+                {item.icon && (
+                  <Image
+                    src={item.icon}
+                    alt={item.name}
+                    width={30}
+                    height={30}
+                  />
+                )}
+
+                <span className="block text-black transition-all ease-in-out delay-75 hover:translate-x-2">
+                  {item.name}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

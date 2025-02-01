@@ -10,12 +10,12 @@ export default function Home() {
 
   return (
     <div className="dash-container min-h-screen bg-gray-300 flex items-start justify-center">
-      <div className="aside-container w-[16rem] h-screen fixed top-0 left-0 md:block hidden">
+      <div className="aside-container w-[16rem] h-screen overflow-y-scroll no-scrollbar fixed top-0 left-0 md:block hidden">
         <RAside />
       </div>
 
       {toggle && (
-        <div className="aside-container w-[16rem] h-screen fixed top-0 left-0 block md:hidden">
+        <div className="aside-container overflow-y-scroll w-[16rem] h-screen no-scrollbar fixed top-0 left-0 block md:hidden">
           <RAside />
         </div>
       )}
