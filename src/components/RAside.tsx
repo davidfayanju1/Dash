@@ -34,10 +34,12 @@ const RAside = () => {
         {listing.map(({ name }) => (
           <div
             key={name}
-            className="item-card hover:bg-slate-50 cursor-pointer w-[12rem] py-[.6rem] rounded-[15px] flex items-center gap-2"
+            className="item-card cursor-pointer w-[12rem] py-[.6rem] rounded-[15px] flex items-center"
           >
             <Image src={"/dot.svg"} alt="dot-icon" width={30} height={30} />
-            <span className="block text-black">{name}</span>
+            <span className="block text-black transition-all ease-in-out delay-75 hover:translate-x-2">
+              {name}
+            </span>
           </div>
         ))}
       </section>
