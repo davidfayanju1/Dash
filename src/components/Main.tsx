@@ -40,6 +40,33 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     },
   ];
 
+  const traffic = [
+    {
+      name: "Google",
+      icon: "/google.svg",
+    },
+    {
+      name: "Youtube",
+      icon: "/youtube.svg",
+    },
+    {
+      name: "Instagram",
+      icon: "/instagram.svg",
+    },
+    {
+      name: "Pinterest",
+      icon: "/pinterest.svg",
+    },
+    {
+      name: "Facebook",
+      icon: "/facebook.svg",
+    },
+    {
+      name: "Twitter",
+      icon: "/twitter.svg",
+    },
+  ];
+
   return (
     <main className="bg-white min-h-screen">
       <nav className="nav-container md:px-[2rem] px-[1rem] py-[1.4rem] border-b-[1px] border-gray-200 flex items-center justify-between">
@@ -196,6 +223,26 @@ const Main = ({ setToggle, toggle }: MainProps) => {
               <small className="block font-bold text-[1rem]">
                 Traffic by Website
               </small>
+
+              <div className="flex-container mt-[1rem]">
+                <div className="">
+                  {traffic.map((item) => (
+                    <div
+                      key={item.name}
+                      className="item-card mb-[1.2rem] flex items-start gap-6"
+                    >
+                      <span className="block">{item.name}</span>
+                      <Image
+                        src={item.icon}
+                        alt={item.name}
+                        width={120}
+                        height={0}
+                        className="mt-[-.8rem]"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
