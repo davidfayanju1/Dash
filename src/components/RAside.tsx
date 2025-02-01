@@ -50,6 +50,25 @@ const RAside = () => {
       name: "Flagged",
     },
   ];
+
+  const lastBatch = [
+    {
+      name: "Account",
+      icon: "/account.svg",
+    },
+    {
+      name: "Corporate",
+      icon: "/corporate.svg",
+    },
+    {
+      name: "Blog",
+      icon: "/blog.svg",
+    },
+    {
+      name: "Social",
+      icon: "/social.svg",
+    },
+  ];
   return (
     <div className="w-full pb-[4rem] md:px-[2rem] px-[1rem] bg-white min-h-screen border-r-[1px] border-gray-200">
       <section className="logo-container py-[1.4rem] flex items-center gap-3">
@@ -151,6 +170,29 @@ const RAside = () => {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="cards-container mt-[4rem]">
+        {lastBatch.map((item) => (
+          <div
+            key={item.name}
+            className={`card-container cursor-pointer flex items-start justify-start mb-3 gap-2`}
+          >
+            <Image
+              src={"/arrowright.svg"}
+              alt={item.name}
+              width={25}
+              height={30}
+            />
+
+            <div className="link-container flex items-center gap-2">
+              <Image src={item.icon} alt={item.name} width={30} height={30} />
+              <span className="block text-black transition-all ease-in-out delay-75 hover:translate-x-2">
+                {item.name}
+              </span>
+            </div>
+          </div>
+        ))}
       </section>
     </div>
   );
