@@ -194,6 +194,17 @@ const RAside = () => {
           </div>
         ))}
       </section>
+
+      <section className="company-logo-container flex items-center gap-2 mt-[10rem]">
+        <Image
+          src={"/plerula.svg"}
+          alt="company-logo-icon"
+          width={35}
+          height={35}
+        />
+
+        <span className="block text-black">Plerula 2025</span>
+      </section>
     </div>
   );
 };
