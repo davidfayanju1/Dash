@@ -132,7 +132,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           {itemsArray.map((item) => (
             <div
               key={item.name}
-              className={`card-item md:px-[2rem] px-[1.4rem] py-[2rem] ${item.color} rounded-[23px]`}
+              className={`card-item md:px-[2rem] px-[1.4rem] md:py-[2rem] py-[1.5rem] ${item.color} rounded-[23px]`}
               style={{ flex: "1 1 250px", minWidth: "250px", width: "100%" }} // Full width on mobile, individual width on larger screens
             >
               <span className="block mb-[.8rem] text-[1rem] text-black">
