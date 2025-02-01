@@ -10,17 +10,28 @@ export default function Home() {
   const [toggle, setToggle] = useState<boolean>(false);
 
   return (
-    <div className="dash-container min-h-screen bg-gray-300 flex items-start justify-center">
+    <div className="dash-container min-h-screen bg-gray-300 flex items-start justify-center relative">
       {/* Sidebar for larger screens */}
       <div className="aside-container w-[16rem] h-screen overflow-y-scroll no-scrollbar fixed top-0 left-0 md:block hidden">
         <RAside />
       </div>
 
-      {/* Animated Sidebar for mobile */}
+      {/* Overlay and Animated Sidebar for mobile */}
+      {toggle && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className="fixed inset-0 bg-black md:hidden"
+          onClick={() => setToggle(false)}
+        />
+      )}
       <motion.div
         initial={{ x: "-100%" }} // Start off-screen to the left
         animate={{ x: toggle ? 0 : "-100%" }} // Animate to visible or hidden
-        transition={{ duration: 0.3 }} // Set the duration of the animation
+        exit={{ x: "-100%" }}
+        transition={{ duration: 0.4, ease: "easeInOut" }} // Set the duration and easing of the animation
         className="aside-container overflow-y-scroll w-[16rem] h-screen no-scrollbar fixed top-0 left-0 block md:hidden"
       >
         <RAside />
