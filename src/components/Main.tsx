@@ -159,7 +159,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           {itemsArray.map((item) => (
             <div
               key={item.name}
-              className={`card-item md:px-[2rem] px-[1.4rem] md:py-[2rem] py-[1.5rem] ${item.color} rounded-[23px]`}
+              className={`card-item md:px-[2rem] items-center justify-center px-[1.4rem] md:py-[2rem] py-[2rem] ${item.color} rounded-[23px]`}
               style={{ flex: "1 1 250px", minWidth: "250px", width: "100%" }} // Full width on mobile, individual width on larger screens
             >
               <span className="block mb-[.8rem] text-[1rem] text-black">
@@ -186,7 +186,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
 
         <section className="chart-section mt-[4rem]">
           <div className="first-chart-section flex items-start justify-between md:flex-row flex-col">
-            <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[74%] w-full rounded-[13px] bg-gray-100">
+            <div className="card-container mb-5 py-5 px-6 block min-h-[25rem] md:w-[74%] w-full rounded-[13px] bg-gray-100">
               <div className="title-container flex items-start gap-3">
                 <small className="block font-bold text-[1rem]">
                   Total Users
@@ -247,14 +247,20 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           </div>
 
           <div className="second-chart-section mt-[4rem] flex items-start justify-between md:flex-row flex-col">
-            <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[34%] w-full rounded-[13px] bg-gray-100">
+            <div className="card-container mb-5 py-5 px-6 block min-h-[25rem] md:w-[34%] w-full rounded-[13px] bg-gray-100">
               <div className="title-container flex items-start gap-3">
                 <small className="block font-bold text-[1rem]">
                   Traffic by Device
                 </small>
               </div>
             </div>
-            <div className="card-container block min-h-[25rem] md:w-[64%] w-full rounded-[13px] bg-gray-100"></div>
+            <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[64%] w-full rounded-[13px] bg-gray-100">
+              <div className="title-container flex items-start gap-3">
+                <small className="block font-bold text-[1rem]">
+                  Traffic by Location
+                </small>
+              </div>
+            </div>
           </div>
         </section>
       </div>
