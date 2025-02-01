@@ -41,7 +41,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
   ];
 
   return (
-    <main className="bg-white min-h-screen ">
+    <main className="bg-white min-h-screen">
       <nav className="nav-container md:px-[2rem] px-[1rem] py-[1.4rem] border-b-[1px] border-gray-200 flex items-center justify-between">
         <div className="first-item-container flex items-center gap-3  h-full">
           <button onClick={() => setToggle(!toggle)} className="outline-none">
@@ -155,6 +155,60 @@ const Main = ({ setToggle, toggle }: MainProps) => {
               </div>
             </div>
           ))}
+        </section>
+
+        <section className="chart-section mt-[4rem]">
+          <div className="first-chart-section flex items-start justify-between md:flex-row flex-col">
+            <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[74%] w-full rounded-[13px] bg-gray-100">
+              <div className="title-container flex items-start gap-3">
+                <small className="block font-bold text-[1rem]">
+                  Total Users
+                </small>
+                <small className="block text-[1rem] text-black/40">
+                  Total Listings
+                </small>
+                <span className="block text-gray-300">|</span>
+                <div className="text-container flex items-center gap-1">
+                  <Image
+                    src={"/today.svg"}
+                    alt="time-icon"
+                    width={29}
+                    height={29}
+                  />
+
+                  <span className="block text-[.8rem] text-black">Today</span>
+                </div>
+                <div className="text-container flex items-center gap-1">
+                  <Image
+                    src={"/thismonth.svg"}
+                    alt="time-icon"
+                    width={29}
+                    height={29}
+                  />
+
+                  <span className="block text-[.8rem] text-black">
+                    This Month
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[24%] w-full rounded-[13px] bg-gray-100">
+              <small className="block font-bold text-[1rem]">
+                Traffic by Website
+              </small>
+            </div>
+          </div>
+
+          <div className="second-chart-section mt-[4rem] flex items-start justify-between md:flex-row flex-col">
+            <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[34%] w-full rounded-[13px] bg-gray-100">
+              <div className="title-container flex items-start gap-3">
+                <small className="block font-bold text-[1rem]">
+                  Traffic by Device
+                </small>
+              </div>
+            </div>
+            <div className="card-container block min-h-[25rem] md:w-[64%] w-full rounded-[13px] bg-gray-100"></div>
+          </div>
         </section>
       </div>
     </main>

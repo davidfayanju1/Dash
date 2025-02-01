@@ -10,7 +10,7 @@ export default function Home() {
   const [toggle, setToggle] = useState<boolean>(false);
 
   return (
-    <div className="dash-container min-h-screen bg-gray-300 flex items-start justify-center relative">
+    <div className="dash-container min-h-screen bg-white flex items-start justify-center relative">
       {/* Sidebar for larger screens */}
       <div className="aside-container w-[16rem] h-screen overflow-y-scroll no-scrollbar fixed top-0 left-0 md:block hidden">
         <RAside />
@@ -38,10 +38,10 @@ export default function Home() {
       </motion.div>
 
       <div className="flex-container ml-0 md:ml-[16rem] min-h-screen w-full flex items-start justify-start md:flex-row flex-col">
-        <div className="md:w-[80%] w-full">
+        <div className="md:w-[80%] w-full min-h-[100vh]">
           <Main setToggle={setToggle} toggle={toggle} />
         </div>
-        <div className="md:w-[20%] w-full">
+        <div className="md:w-[20%] w-full min-h-[100vh]">
           <LAside />
         </div>
       </div>

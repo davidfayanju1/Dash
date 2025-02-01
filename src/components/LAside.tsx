@@ -81,7 +81,7 @@ const LAside = () => {
   ];
 
   return (
-    <aside className="page-container min-h-screen md:px-[1.4rem] px-[1rem] py-[1.4rem] bg-white border-l-[1px] border-gray-200">
+    <aside className="page-container min-h-[100vh] md:px-[1.4rem] px-[1rem] py-[1.4rem] bg-white border-l-[1px] border-gray-200">
       <section className="section-container">
         <span className="title block">Notifications</span>
         <div className="notifications mt-[1.5rem]">
