@@ -9,9 +9,11 @@ import {
   Tooltip,
   Legend,
   FontSpec,
+  ArcElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut, Pie } from "react-chartjs-2";
 ChartJS.register(
+  ArcElement,
   CategoryScale,
   LinearScale,
   BarElement,
@@ -104,6 +106,58 @@ const Main = ({ setToggle, toggle }: MainProps) => {
       },
     ],
   });
+
+  const [pieData] = useState({
+    labels: ["Linux", "Mac", "IOS", "Windows", "Android", "Other"],
+    datasets: [
+      {
+        label: "Traffic by Location",
+        data: [15000, 40000, 20000, 35000, 5000, 27000],
+        backgroundColor: [
+          "#9F9FF8",
+          "#96E2D6",
+          "#000000",
+          "#92BFFF",
+          "#AEC7ED",
+          "#94E9B8",
+        ],
+        borderWidth: 0,
+        borderRadius: 13,
+      },
+    ],
+  });
+
+  const pieOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Traffic by Location",
+        font: {
+          family: "Arial",
+          size: 16,
+          style: "normal",
+          weight: "bold",
+        },
+        color: "#000000",
+        padding: {
+          top: 10,
+          bottom: 20,
+        },
+      },
+    },
+  };
+
+  const pieChartContainerStyle = {
+    width: "100%",
+    height: "350px", // Set a larger height for a bigger Pie Chart
+    backgroundColor: "transparent",
+  };
 
   type ChartOptions = {
     responsive: boolean;
@@ -366,9 +420,6 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           <div className="second-chart-section mt-[4rem] flex items-start justify-between md:flex-row flex-col">
             <div className="card-container mb-5 py-5 px-6 block min-h-[25rem] md:w-[34%] w-full rounded-[13px] bg-gray-100">
               <div className="title-container">
-                {/* <small className="block font-bold text-[1rem]">
-                  Traffic by Device
-                </small> */}
                 <div style={chartContainerStyle}>
                   <Bar data={chartData} options={options} />
                 </div>
@@ -376,9 +427,9 @@ const Main = ({ setToggle, toggle }: MainProps) => {
             </div>
             <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[64%] w-full rounded-[13px] bg-gray-100">
               <div className="title-container flex items-start gap-3">
-                <small className="block font-bold text-[1rem]">
-                  Traffic by Location
-                </small>
+                <div style={pieChartContainerStyle}>
+                  <Doughnut data={pieData} options={pieOptions} />
+                </div>
               </div>
             </div>
           </div>
