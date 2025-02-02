@@ -92,11 +92,15 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         label: "Traffic by Device",
         data: [15000, 10000, 20000, 30000],
         backgroundColor: [
-          "rgba(255, 255, 255, 0.6)",
-          "rgba(255, 255, 255, 0.6)",
-          "rgba(255, 255, 255, 0.6)",
+          "#9F9FF8",
+          "#96E2D6",
+          "#000000",
+          "#92BFFF",
+          "#AEC7ED",
+          "#94E9B8",
         ],
-        borderWidth: 1,
+        borderWidth: 0,
+        borderRadius: 10,
       },
     ],
   });
@@ -163,7 +167,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         color: "#000000",
         padding: {
           top: 10,
-          bottom: 10,
+          bottom: 50,
         },
       },
       legend: {
