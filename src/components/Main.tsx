@@ -127,7 +127,29 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     ],
   });
 
-  const pieOptions = {
+  type pieChartOptions = {
+    responsive: boolean;
+    maintainAspectRatio: boolean;
+
+    plugins: {
+      legend: {
+        display: boolean;
+        position: "top" | "center" | "right" | "bottom" | "left" | "chartArea";
+      };
+      title: {
+        display: boolean;
+        text: string;
+        font: Partial<FontSpec>;
+        color: string;
+        padding: {
+          top: number;
+          bottom: number;
+        };
+      };
+    };
+  };
+
+  const pieOptions: pieChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
