@@ -8,6 +8,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  FontSpec,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 ChartJS.register(
@@ -120,12 +121,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         display: boolean;
         text: string;
         align: "start" | "center" | "end" | undefined;
-        font: {
-          family: string;
-          size: number;
-          style: string;
-          weight: string;
-        };
+        font: Partial<FontSpec>;
         color: string;
         padding: {
           top: number;
