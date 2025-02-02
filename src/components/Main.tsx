@@ -1,6 +1,24 @@
 import Image from "next/image";
-import React from "react";
-
+import React, { useState } from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  TitleOptions,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 interface MainProps {
   toggle: boolean;
   setToggle: (value: boolean) => void;
@@ -66,6 +84,103 @@ const Main = ({ setToggle, toggle }: MainProps) => {
       icon: "/twitter.svg",
     },
   ];
+
+  const [chartData, setChartData] = useState({
+    labels: ["Linux", "Mac", "IOS", "Windows", "Android", "Other"],
+    datasets: [
+      {
+        label: "Traffic by Device",
+        data: [15000, 10000, 20000, 30000],
+        backgroundColor: [
+          "rgba(255, 255, 255, 0.6)",
+          "rgba(255, 255, 255, 0.6)",
+          "rgba(255, 255, 255, 0.6)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  type ChartOptions = {
+    responsive: boolean;
+    maintainAspectRatio: boolean;
+    scales: {
+      x: {
+        grid: {
+          display: boolean; // Remove gridlines on the x-axis
+        };
+      };
+      y: {
+        grid: {
+          display: boolean; // Remove gridlines on the y-axis
+        };
+      };
+    };
+    plugins: {
+      title: {
+        display: boolean;
+        text: string;
+        align: "start" | "center" | "end" | undefined;
+        font: {
+          family: string;
+          size: number;
+          style: string;
+          weight: string;
+        };
+        color: string;
+        padding: {
+          top: number;
+          bottom: number;
+        };
+      };
+      legend: {
+        display: boolean;
+      };
+    };
+  };
+
+  const options: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        grid: {
+          display: false, // Remove gridlines on the x-axis
+        },
+      },
+      y: {
+        grid: {
+          display: false, // Remove gridlines on the y-axis
+        },
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: "Traffic by Device",
+        align: "start",
+        font: {
+          size: 16,
+          weight: "bold",
+          style: "normal",
+          family: "Arial",
+        } as any,
+        color: "#000000",
+        padding: {
+          top: 10,
+          bottom: 10,
+        },
+      },
+      legend: {
+        display: false,
+      },
+    },
+  };
+
+  const chartContainerStyle = {
+    width: "100%",
+    minHeight: "300px", // Set minimum height to ensure visibility
+  };
 
   return (
     <main className="bg-white min-h-screen">
@@ -229,16 +344,19 @@ const Main = ({ setToggle, toggle }: MainProps) => {
                   {traffic.map((item) => (
                     <div
                       key={item.name}
-                      className="item-card mb-[1.2rem] flex items-start gap-6"
+                      className="item-card flex items-center gap-4 mb-[1.5rem]"
                     >
                       <span className="block">{item.name}</span>
-                      <Image
-                        src={item.icon}
-                        alt={item.name}
-                        width={120}
-                        height={0}
-                        className="mt-[-.8rem]"
-                      />
+
+                      <div className="icon-container">
+                        <Image
+                          src={item.icon}
+                          alt={item.name}
+                          width={120}
+                          height={80}
+                          className=""
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -248,10 +366,13 @@ const Main = ({ setToggle, toggle }: MainProps) => {
 
           <div className="second-chart-section mt-[4rem] flex items-start justify-between md:flex-row flex-col">
             <div className="card-container mb-5 py-5 px-6 block min-h-[25rem] md:w-[34%] w-full rounded-[13px] bg-gray-100">
-              <div className="title-container flex items-start gap-3">
-                <small className="block font-bold text-[1rem]">
+              <div className="title-container">
+                {/* <small className="block font-bold text-[1rem]">
                   Traffic by Device
-                </small>
+                </small> */}
+                <div style={chartContainerStyle}>
+                  <Bar data={chartData} options={options} />
+                </div>
               </div>
             </div>
             <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[64%] w-full rounded-[13px] bg-gray-100">
