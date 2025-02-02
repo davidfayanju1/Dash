@@ -90,7 +90,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     datasets: [
       {
         label: "Traffic by Device",
-        data: [15000, 10000, 20000, 30000],
+        data: [15000, 40000, 20000, 35000, 5000, 27000],
         backgroundColor: [
           "#9F9FF8",
           "#96E2D6",
@@ -100,7 +100,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           "#94E9B8",
         ],
         borderWidth: 0,
-        borderRadius: 10,
+        borderRadius: 13,
       },
     ],
   });
