@@ -84,7 +84,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     },
   ];
 
-  const [chartData, setChartData] = useState({
+  const [chartData] = useState({
     labels: ["Linux", "Mac", "IOS", "Windows", "Android", "Other"],
     datasets: [
       {
