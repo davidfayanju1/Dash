@@ -104,11 +104,11 @@ const RAside = () => {
 
       <section className="dashboard mb-[2rem]">
         <span className="title text-[1rem] text-black/40">Dashboards</span>
-        <div className="cards-container mt-4">
+        <div className=" mt-4">
           {dashboards.map((item) => (
             <div
               key={item.name}
-              className={`card-container ${
+              className={` ${
                 item.active === true
                   ? "bg-gray-200 px-8 py-2 rounded-[9px]"
                   : ""
@@ -136,11 +136,11 @@ const RAside = () => {
 
       <section className="reports">
         <span className="title text-[1rem] text-black/40">Reports</span>
-        <div className="cards-container mt-4">
+        <div className=" mt-4">
           {reports.map((item) => (
             <div
               key={item.name}
-              className={`card-container ${
+              className={` ${
                 item.icon && item.iconII ? "" : "pl-[2.5rem]"
               } cursor-pointer flex items-start justify-start mb-5 gap-2`}
             >
@@ -172,11 +172,11 @@ const RAside = () => {
         </div>
       </section>
 
-      <section className="cards-container mt-[4rem]">
+      <section className=" mt-[4rem]">
         {lastBatch.map((item) => (
           <div
             key={item.name}
-            className={`card-container cursor-pointer flex items-start justify-start mb-3 gap-2`}
+            className={` cursor-pointer flex items-start justify-start mb-3 gap-2`}
           >
             <Image
               src={"/arrowright.svg"}
