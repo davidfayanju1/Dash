@@ -10,9 +10,13 @@ import {
   Legend,
   FontSpec,
   ArcElement,
+  LineElement,
+  PointElement,
 } from "chart.js";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
 ChartJS.register(
+  PointElement,
+  LineElement,
   ArcElement,
   CategoryScale,
   LinearScale,
@@ -210,13 +214,29 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     scales: {
       x: {
         grid: {
-          display: boolean; // Remove gridlines on the x-axis
+          display: boolean;
+          drawBorder: boolean;
+        };
+        ticks: {
+          display: boolean;
         };
       };
       y: {
         grid: {
-          display: boolean; // Remove gridlines on the y-axis
+          display: boolean;
+          drawBorder: boolean;
         };
+        ticks: {
+          display: boolean;
+          callback: (
+            tickValue: string | number,
+            index: number,
+            ticks: any[]
+          ) => string | number; // Compatible callback type
+          stepSize: number;
+        };
+        min: number;
+        max: number;
       };
     };
     plugins: {
@@ -244,12 +264,27 @@ const Main = ({ setToggle, toggle }: MainProps) => {
       x: {
         grid: {
           display: false, // Remove gridlines on the x-axis
+          drawBorder: false, // Remove the x-axis line
+        },
+        ticks: {
+          display: true, // Keep x-axis ticks
         },
       },
       y: {
         grid: {
           display: false, // Remove gridlines on the y-axis
+          drawBorder: false, // Remove the y-axis line
         },
+        ticks: {
+          display: true, // Show y-axis ticks
+          callback: (tickValue: string | number) =>
+            typeof tickValue === "number" && tickValue === 0
+              ? tickValue.toString()
+              : `${Number(tickValue) / 1000}k`, // Format y-axis labels
+          stepSize: 10000, // Step size for the y-axis ticks
+        },
+        min: 0,
+        max: 50000,
       },
     },
     plugins: {
@@ -298,6 +333,137 @@ const Main = ({ setToggle, toggle }: MainProps) => {
       chart.update();
     }
   }, []);
+
+  const [lineChartData] = useState({
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "Total Users",
+        data: [10000, 15000, 25000, 20000, 30000, 18000, 23000],
+        borderColor: "#000000",
+        backgroundColor: "#9F9FF8",
+        fill: false,
+        pointRadius: 5,
+        pointBackgroundColor: "#9F9FF8",
+      },
+    ],
+  });
+
+  type LineChartOptions = {
+    responsive: boolean;
+    maintainAspectRatio: boolean;
+    scales: {
+      x: {
+        grid: {
+          display: boolean;
+          drawBorder: boolean;
+        };
+        ticks: {
+          display: boolean;
+        };
+      };
+      y: {
+        grid: {
+          display: boolean;
+          drawBorder: boolean;
+        };
+        ticks: {
+          display: boolean;
+          callback: (
+            tickValue: string | number,
+            index: number,
+            ticks: any
+          ) => string | number | string[] | number[] | null | undefined;
+          stepSize: number;
+        };
+
+        min: number;
+        max: number;
+      };
+    };
+    plugins: {
+      title: {
+        display: boolean;
+        text: string;
+        align: "start" | "center" | "end" | undefined;
+        font: Partial<FontSpec>;
+        color: string;
+        padding: {
+          top: number;
+          bottom: number;
+        };
+      };
+      legend: {
+        display: boolean;
+        position: "top" | "center" | "right" | "bottom" | "left" | "chartArea";
+      };
+    };
+  };
+
+  const lineChartOptions: LineChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        grid: {
+          display: false, // Remove gridlines on the x-axis
+          drawBorder: false, // Remove the x-axis line
+        },
+        ticks: {
+          display: true, // Keep x-axis ticks
+        },
+      },
+      y: {
+        grid: {
+          display: false, // Remove gridlines on the y-axis
+          drawBorder: false, // Remove the y-axis line
+        },
+        ticks: {
+          display: true,
+          callback: (tickValue: string | number, index: number, ticks: any) => {
+            if (typeof tickValue === "number") {
+              return tickValue === 0
+                ? tickValue.toString()
+                : `${tickValue / 1000}k`;
+            } else {
+              return tickValue;
+            }
+          },
+          stepSize: 10000,
+        },
+
+        min: 0,
+        max: 30000,
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: "Traffic by Month",
+        align: "start",
+        font: {
+          size: 16,
+          weight: "bold",
+          style: "normal",
+          family: "Inter",
+        } as any,
+        color: "#000000",
+        padding: {
+          top: 10,
+          bottom: 50,
+        },
+      },
+      legend: {
+        display: true,
+        position: "top",
+      },
+    },
+  };
+
+  const lineChartContainerStyle = {
+    width: "100%",
+    minHeight: "300px", // Set minimum height to ensure visibility
+  };
 
   return (
     <main className="bg-white min-h-screen">
@@ -419,7 +585,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         <section className="chart-section mt-[4rem]">
           <div className="first-chart-section flex items-start justify-between md:flex-row flex-col">
             <div className="card-container mb-5 py-5 px-6 block min-h-[25rem] md:w-[74%] w-full rounded-[13px] bg-gray-100">
-              <div className="title-container flex items-start gap-3">
+              {/* <div className="title-container flex items-start gap-3">
                 <small className="block font-bold text-[1rem]">
                   Total Users
                 </small>
@@ -449,6 +615,10 @@ const Main = ({ setToggle, toggle }: MainProps) => {
                     This Month
                   </span>
                 </div>
+              </div> */}
+
+              <div style={lineChartContainerStyle}>
+                <Line data={lineChartData} options={lineChartOptions} />
               </div>
             </div>
             <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[24%] w-full rounded-[13px] bg-gray-100">
@@ -461,11 +631,11 @@ const Main = ({ setToggle, toggle }: MainProps) => {
                   {traffic.map((item) => (
                     <div
                       key={item.name}
-                      className="item-card flex items-center gap-4 mb-[1.5rem]"
+                      className="item-card flex items-center gap-4"
                     >
                       <span className="block">{item.name}</span>
 
-                      <div className="icon-container">
+                      <div className="icon-container  flex items-end justify-end">
                         <Image
                           src={item.icon}
                           alt={item.name}
