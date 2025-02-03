@@ -181,6 +181,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         labels: {
           usePointStyle: true,
           pointStyle: "circle", // Use circles for legend markers
+
           generateLabels: (chart: any) => {
             const data = chart.data;
             if (data.labels && data.datasets.length) {
@@ -316,7 +317,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           style: "normal",
           family: "Inter",
         } as any,
-        color: theme === "location" ? "#000000" : "#FFFFFF",
+        color: theme === "light" ? "#000000" : "#FFFFFF",
         padding: {
           top: 10,
           bottom: 50,
