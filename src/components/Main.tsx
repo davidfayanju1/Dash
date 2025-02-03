@@ -342,9 +342,9 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         data: [10000, 15000, 25000, 20000, 30000, 18000, 23000],
         borderColor: "#000000",
         backgroundColor: "#9F9FF8",
-        fill: false,
+        fill: true,
         pointRadius: 0,
-        pointBackgroundColor: "transparent",
+        pointBackgroundColor: "#9F9FF8",
         tension: 0.4,
       },
     ],
@@ -392,11 +392,20 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         padding: {
           top: number;
           bottom: number;
+          left: number;
+          right: number;
         };
+        backgroundColor: string;
+        borderRadius: number;
+        border: string;
       };
       legend: {
         display: boolean;
         position: "top" | "center" | "right" | "bottom" | "left" | "chartArea";
+        labels: {
+          usePointStyle: boolean;
+          pointStyle: "circle";
+        };
       };
     };
   };
@@ -455,12 +464,21 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         color: "#000000",
         padding: {
           top: 10,
-          bottom: 50,
+          bottom: 10,
+          left: 10,
+          right: 10,
         },
+        backgroundColor: "#f0f0f0", // Add background color
+        borderRadius: 10, // Make the title rounded
+        border: "none", // Remove the border
       },
       legend: {
         display: true,
         position: "top",
+        labels: {
+          usePointStyle: true,
+          pointStyle: "circle", // Use circle point style
+        },
       },
     },
   };
