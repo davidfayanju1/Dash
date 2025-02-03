@@ -338,13 +338,14 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
-        label: "Total Users",
+        label: "This Month",
         data: [10000, 15000, 25000, 20000, 30000, 18000, 23000],
         borderColor: "#000000",
         backgroundColor: "#9F9FF8",
         fill: false,
-        pointRadius: 5,
-        pointBackgroundColor: "#9F9FF8",
+        pointRadius: 0,
+        pointBackgroundColor: "transparent",
+        tension: 0.4,
       },
     ],
   });
@@ -443,7 +444,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     plugins: {
       title: {
         display: true,
-        text: "Traffic by Month",
+        text: "Total Users",
         align: "start",
         font: {
           size: 16,
