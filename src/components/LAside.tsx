@@ -81,7 +81,7 @@ const LAside = () => {
     },
   ];
 
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <aside

@@ -73,7 +73,7 @@ const RAside = () => {
       icon: "/social.svg",
     },
   ];
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div
