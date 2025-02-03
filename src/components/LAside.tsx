@@ -88,11 +88,11 @@ const LAside = () => {
           {notifications.map((item) => (
             <div
               key={item.name}
-              className="notification-card mb-[1rem] flex items-center gap-2"
+              className="notification-card p-1 rounded-[8px] cursor-default ease-in-out transition-all delay-[.25s] hover:bg-[#f2f0f0] mb-[1rem] flex items-center gap-2"
             >
               <Image src={item.icon} alt={item.name} width={25} height={25} />
               <div className="text-container">
-                <span className="block text-black text-[.7rem]">
+                <span className="block notifications-text text-black text-[.7rem]">
                   {item.name}
                 </span>
                 <small className="block text-black/40 text-[.7rem]">
