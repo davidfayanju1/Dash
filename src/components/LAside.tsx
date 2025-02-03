@@ -1,3 +1,4 @@
+// import { useTheme } from "@/ThemeContext";
 import Image from "next/image";
 import React from "react";
 
@@ -79,6 +80,8 @@ const LAside = () => {
       icon: "/melody.svg",
     },
   ];
+
+  // const { theme, toggleTheme } = useTheme();
 
   return (
     <aside className="page-container md:px-[1.4rem] px-[1rem] py-[1.4rem] bg-white border-l-[1px] min-h-[130vh] border-gray-200">

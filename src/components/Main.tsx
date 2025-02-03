@@ -581,23 +581,26 @@ const Main = ({ setToggle, toggle }: MainProps) => {
             <div
               key={item.name}
               className={`card-item md:px-[2rem] items-center justify-center px-[1.4rem] md:py-[2rem] py-[2rem] ${item.color} rounded-[23px]`}
-              style={{ flex: "1 1 250px", minWidth: "250px", width: "100%" }} // Full width on mobile, individual width on larger screens
+              style={{ flex: "1 190px", minWidth: "190px", width: "100%" }} // Full width on mobile, individual width on larger screens
             >
-              <span className="block mb-[.8rem] text-[1rem] text-black">
+              <span className="block cursor-default hover:translate-x-1 transition-all delay-75 ease-in-out mb-[.8rem] text-[1rem] text-black">
                 {item.name}
               </span>
               <div className="flex-container flex items-center justify-between gap-3">
-                <span className="block font-bold text-black text-[2rem]">
+                <span className="block font-semibold text-black text-[1.9rem]">
                   {item.amount}
                 </span>
 
                 <div className="arrow-container flex items-center gap-3">
-                  <small className="block">{item.percentage}</small>
+                  <small className="block cursor-default">
+                    {item.percentage}
+                  </small>
                   <Image
                     src={item.icon}
                     alt={item.name}
                     width={20}
                     height={20}
+                    className="cursor-default"
                   />
                 </div>
               </div>
