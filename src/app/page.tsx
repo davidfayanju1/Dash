@@ -41,7 +41,7 @@ export default function Home() {
         <div className="md:w-[80%] w-full min-h-[100vh]">
           <Main setToggle={setToggle} toggle={toggle} />
         </div>
-        <div className="md:w-[20%] w-full min-h-[100vh]">
+        <div className="md:w-[20%] w-full h-full">
           <LAside />
         </div>
       </div>
