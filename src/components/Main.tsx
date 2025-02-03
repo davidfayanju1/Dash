@@ -33,7 +33,7 @@ interface MainProps {
 const Main = ({ setToggle, toggle }: MainProps) => {
   const itemsArray = [
     {
-      name: "Total Products",
+      name: "Total Product Views",
       amount: "7,265",
       color: "bg-[#EDEEFC]",
       percentage: "+11.01%",
@@ -580,14 +580,14 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           {itemsArray.map((item) => (
             <div
               key={item.name}
-              className={`card-item md:px-[2rem] items-center justify-center px-[1.4rem] md:py-[2rem] py-[2rem] ${item.color} rounded-[23px]`}
+              className={`card-item md:px-[1rem] items-center justify-center px-[1.4rem] md:py-[2rem] py-0 ${item.color} rounded-[23px]`}
               style={{ flex: "1 190px", minWidth: "190px", width: "100%" }} // Full width on mobile, individual width on larger screens
             >
               <span className="block cursor-default hover:translate-x-1 transition-all delay-75 ease-in-out mb-[.8rem] text-[1rem] text-black">
                 {item.name}
               </span>
               <div className="flex-container flex items-center justify-between gap-3">
-                <span className="block font-semibold text-black text-[1.9rem]">
+                <span className="block font-semibold text-black md:text-[1.75vw] text-[1.5rem]">
                   {item.amount}
                 </span>
 
