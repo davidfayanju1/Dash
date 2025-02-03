@@ -370,9 +370,9 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         ticks: {
           display: boolean;
           callback: (
-            tickValue: string | number,
-            index: number,
-            ticks: any
+            tickValue: string | number
+            // index: number,
+            // ticks: any
           ) => string | number | string[] | number[] | null | undefined;
           stepSize: number;
         };
@@ -420,7 +420,11 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         },
         ticks: {
           display: true,
-          callback: (tickValue: string | number, index: number, ticks: any) => {
+          callback: (
+            tickValue: string | number
+            // _index: number,
+            // _ticks: any
+          ) => {
             if (typeof tickValue === "number") {
               return tickValue === 0
                 ? tickValue.toString()
