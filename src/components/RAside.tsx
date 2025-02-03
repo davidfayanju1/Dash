@@ -1,3 +1,4 @@
+import { useTheme } from "@/ThemeContext";
 import Image from "next/image";
 import React from "react";
 
@@ -16,6 +17,7 @@ const RAside = () => {
     {
       name: "Overview",
       icon: "/dashoverview.svg",
+      dark: "/overviewdark.svg",
       active: true,
     },
 
@@ -23,10 +25,12 @@ const RAside = () => {
       name: "User Mgmt",
       icon: "/usermgt.svg",
       active: false,
+      dark: "/usermgtdark.svg",
     },
     {
       name: "Listings",
       icon: "/listings.svg",
+      dark: "/listingsdark.svg",
       active: false,
     },
   ];
@@ -69,8 +73,16 @@ const RAside = () => {
       icon: "/social.svg",
     },
   ];
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <div className="w-full pb-[4rem] md:px-[2rem] px-[1rem] bg-white min-h-screen border-r-[1px] border-gray-200">
+    <div
+      className={`w-full pb-[4rem] md:px-[2rem] px-[1rem] ${
+        theme === "dark"
+          ? "bg-black/80 border-gray-600"
+          : "bg-white border-gray-200"
+      } min-h-screen border-r-[1px] border-gray-200`}
+    >
       <section className="logo-container py-[1.4rem] flex items-center gap-3">
         <Image
           className="object-cover rounded-full"
@@ -80,12 +92,28 @@ const RAside = () => {
           height={50}
         />
 
-        <span className={"block text-black"}>Prelura</span>
+        <span
+          className={`block  ${theme === "dark" ? "text-white" : "text-black"}`}
+        >
+          Prelura
+        </span>
       </section>
 
       <div className="button-flex-container mt-[1rem] flex items-center gap-4">
-        <button className="text-black/40 text-[1rem]">Favorites</button>
-        <button className="text-black/20 text-[1rem]">Recent</button>
+        <button
+          className={` ${
+            theme === "dark" ? "text-white/40" : "text-black/40"
+          } text-[1rem]`}
+        >
+          Favorites
+        </button>
+        <button
+          className={`text-[1rem] ${
+            theme === "dark" ? "text-white/20" : "text-black/20"
+          }`}
+        >
+          Recent
+        </button>
       </div>
 
       <section className="listings flex items-start justify-start gap-3 flex-col w-full mt-[1.5rem] mb-[2.5rem]">
@@ -94,8 +122,17 @@ const RAside = () => {
             key={name}
             className="item-card cursor-pointer w-[12rem] py-[.6rem] rounded-[15px] flex items-center"
           >
-            <Image src={"/dot.svg"} alt="dot-icon" width={30} height={30} />
-            <span className="block text-black transition-all ease-in-out delay-75 hover:translate-x-2">
+            <Image
+              src={theme === "light" ? "/dot.svg" : "/dotdark.svg"}
+              alt="dot-icon"
+              width={30}
+              height={30}
+            />
+            <span
+              className={`block ${
+                theme === "light" ? "text-black" : "text-white"
+              }  transition-all ease-in-out delay-75 hover:translate-x-2`}
+            >
               {name}
             </span>
           </div>
@@ -103,14 +140,22 @@ const RAside = () => {
       </section>
 
       <section className="dashboard mb-[2rem]">
-        <span className="title text-[1rem] text-black/40">Dashboards</span>
+        <span
+          className={`title text-[1rem]  ${
+            theme === "light" ? "text-black/40" : "text-white/40"
+          }`}
+        >
+          Dashboards
+        </span>
         <div className=" mt-4">
           {dashboards.map((item) => (
             <div
               key={item.name}
               className={` ${
                 item.active === true
-                  ? "bg-gray-200 px-8 py-2 rounded-[9px]"
+                  ? ` ${
+                      theme === "dark" ? "bg-white/10" : "bg-gray-200"
+                    } px-8 py-2 rounded-[9px]`
                   : ""
               } cursor-pointer flex items-start justify-start mb-3 gap-2`}
             >
@@ -124,8 +169,17 @@ const RAside = () => {
               )}
 
               <div className="link-container flex items-center gap-2">
-                <Image src={item.icon} alt={item.name} width={30} height={30} />
-                <span className="block text-black transition-all ease-in-out delay-75 hover:translate-x-2">
+                <Image
+                  src={theme === "light" ? item.icon : item.dark}
+                  alt={item.name}
+                  width={30}
+                  height={30}
+                />
+                <span
+                  className={`block  ${
+                    theme === "light" ? "text-black" : "text-white"
+                  } transition-all ease-in-out delay-75 hover:translate-x-2`}
+                >
                   {item.name}
                 </span>
               </div>
@@ -135,7 +189,13 @@ const RAside = () => {
       </section>
 
       <section className="reports">
-        <span className="title text-[1rem] text-black/40">Reports</span>
+        <span
+          className={`title text-[1rem]  ${
+            theme === "light" ? "text-black/40" : "text-white/40"
+          }`}
+        >
+          Reports
+        </span>
         <div className=" mt-4">
           {reports.map((item) => (
             <div
@@ -163,7 +223,11 @@ const RAside = () => {
                   />
                 )}
 
-                <span className="block text-black transition-all ease-in-out delay-75 hover:translate-x-2">
+                <span
+                  className={`block  transition-all ease-in-out ${
+                    theme === "dark" ? "text-white" : "text-black"
+                  } delay-75 hover:translate-x-2`}
+                >
                   {item.name}
                 </span>
               </div>
@@ -179,7 +243,9 @@ const RAside = () => {
             className={` cursor-pointer flex items-start justify-start mb-3 gap-2`}
           >
             <Image
-              src={"/arrowright.svg"}
+              src={
+                theme === "light" ? "/arrowright.svg" : "/arrowrightdark.svg"
+              }
               alt={item.name}
               width={25}
               height={30}
@@ -187,7 +253,11 @@ const RAside = () => {
 
             <div className="link-container flex items-center gap-2">
               <Image src={item.icon} alt={item.name} width={30} height={30} />
-              <span className="block text-black transition-all ease-in-out delay-75 hover:translate-x-2">
+              <span
+                className={`block  ${
+                  theme === "dark" ? "text-white" : "text-black"
+                } transition-all ease-in-out delay-75 hover:translate-x-2`}
+              >
                 {item.name}
               </span>
             </div>
@@ -203,7 +273,13 @@ const RAside = () => {
           height={35}
         />
 
-        <span className="block text-black">Plerula 2025</span>
+        <span
+          className={`block  ${
+            theme === "light" ? "text-black" : "text-white"
+          }`}
+        >
+          Plerula 2025
+        </span>
       </section>
     </div>
   );

@@ -86,8 +86,10 @@ const LAside = () => {
   return (
     <aside
       className={`page-container md:px-[1.4rem] px-[1rem] py-[1.4rem] ${
-        theme === "dark" ? "bg-black/80" : "bg-white"
-      } border-l-[1px] min-h-[130vh] border-gray-200`}
+        theme === "dark"
+          ? "bg-black/80 border-gray-600"
+          : "bg-white border-gray-200"
+      } border-l-[1px] min-h-[127.2vh] `}
     >
       <section className="section-container">
         <span
