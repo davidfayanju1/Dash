@@ -14,6 +14,7 @@ import {
   PointElement,
 } from "chart.js";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { useTheme } from "@/ThemeContext";
 ChartJS.register(
   PointElement,
   LineElement,
@@ -31,10 +32,13 @@ interface MainProps {
 }
 
 const Main = ({ setToggle, toggle }: MainProps) => {
+  const { theme, toggleTheme } = useTheme();
+
   const itemsArray = [
     {
       name: "Total Product Views",
       amount: "7,265",
+      lightColor: "bg-[#EDEEFC]",
       color: "bg-[#EDEEFC]",
       percentage: "+11.01%",
       icon: "/arrowup.svg",
@@ -42,6 +46,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     {
       name: "Visits",
       amount: "3,671",
+      lightColor: "bg-[#E6F1FD]",
       color: "bg-[#E6F1FD]",
       percentage: "-0.03%",
       icon: "/arrowdown.svg",
@@ -50,6 +55,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     {
       name: "New Users",
       amount: "156",
+      lightColor: "bg-[#EDEEFC]",
       color: "bg-[#EDEEFC]",
       percentage: "+15.03%",
       icon: "/arrowup.svg",
@@ -59,6 +65,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
       name: "Total Users",
       amount: "2,318",
       color: "bg-[#E6F1FD]",
+      lightColor: "bg-[#E6F1FD]",
       percentage: "+6.08%",
       icon: "/arrowup.svg",
     },
@@ -68,26 +75,32 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     {
       name: "Google",
       icon: "/google.svg",
+      dark: "/googledark.svg",
     },
     {
       name: "Youtube",
       icon: "/youtube.svg",
+      dark: "/youtubedark.svg",
     },
     {
       name: "Instagram",
       icon: "/instagram.svg",
+      dark: "/instagramdark.svg",
     },
     {
       name: "Pinterest",
       icon: "/pinterest.svg",
+      dark: "/pinterestdark.svg",
     },
     {
       name: "Facebook",
       icon: "/facebook.svg",
+      dark: "/facebookdark.svg",
     },
     {
       name: "Twitter",
       icon: "/twitter.svg",
+      dark: "/twitterdark.svg",
     },
   ];
 
@@ -117,8 +130,13 @@ const Main = ({ setToggle, toggle }: MainProps) => {
       {
         label: "Traffic by Location",
         data: [52.1, 22.8, 13.9, 11.2],
-        backgroundColor: ["#000000", "#9F9FF8", "#96E2D6", "#92BFFF"],
-        borderColor: "#F7F7F7",
+        backgroundColor: [
+          theme === "light" ? "#000000" : "#9F9FF8",
+          "#9F9FF8",
+          "#96E2D6",
+          "#92BFFF",
+        ],
+        borderColor: theme === "light" ? "#F7F7F7" : "#FFFFFF1A",
         borderWidth: 3,
         borderRadius: 7,
       },
@@ -193,7 +211,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           style: "normal",
           weight: "bold",
         },
-        color: "#000000",
+        color: theme === "light" ? "#000000" : "#FFFFFF",
         padding: {
           top: 10,
           bottom: 40,
@@ -298,7 +316,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           style: "normal",
           family: "Inter",
         } as any,
-        color: "#000000",
+        color: theme === "location" ? "#000000" : "#FFFFFF",
         padding: {
           top: 10,
           bottom: 50,
@@ -332,7 +350,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
       }
       chart.update();
     }
-  }, []);
+  }, [theme]);
 
   const [lineChartData] = useState({
     labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -461,7 +479,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           style: "normal",
           family: "Inter",
         } as any,
-        color: "#000000",
+        color: theme === "light" ? "#000000" : "#FFFFFF",
         padding: {
           top: 10,
           bottom: 10,
@@ -489,42 +507,70 @@ const Main = ({ setToggle, toggle }: MainProps) => {
   };
 
   return (
-    <main className="bg-white min-h-screen">
+    <main
+      className={` min-h-screen ${
+        theme === "dark" ? "bg-black/80" : "bg-white"
+      }`}
+    >
       <nav className="nav-container md:px-[2rem] px-[1rem] py-[1.4rem] border-b-[1px] border-gray-200 flex items-center justify-between">
         <div className="first-item-container flex items-center gap-3  h-full">
           <button onClick={() => setToggle(!toggle)} className="outline-none">
             <Image
-              src={"/book.svg"}
+              src={theme === "dark" ? "/booklight.svg" : "/book.svg"}
               alt="svg-component"
               width={30}
               height={30}
             />
           </button>
-          <Image src={"/star.svg"} alt="svg-component" width={30} height={30} />
+          <Image
+            src={theme === "dark" ? "/starlight.svg" : "star.svg"}
+            alt="svg-component"
+            width={30}
+            height={30}
+          />
 
-          <span className="block text-black/40">
-            Dashboard /<span className="text-black">Default</span>
-          </span>
+          <small
+            className={`block ${
+              theme === "dark" ? "text-white/40" : "text-black/40"
+            }`}
+          >
+            Dashboard /
+            <span
+              className={`text-black ${
+                theme === "dark" ? "text-gray-100" : "text-black/40"
+              }`}
+            >
+              Default
+            </span>
+          </small>
         </div>
         <div className="second-item-container  hidden md:flex items-center justify-center gap-3">
-          <div className="search-input mr-[4rem] px-[.8rem] bg-gray-100 h-[2.5rem] rounded-[6px] flex items-center w-full">
+          <div
+            className={`search-input mr-[4rem] px-[.8rem]  ${
+              theme === "light" ? "bg-gray-100" : "bg-white/10"
+            } h-[2.5rem] rounded-[9px] flex items-center w-[70%]`}
+          >
             <div className="image-container">
               <Image
-                src={"/search.svg"}
+                src={theme === "light" ? "/search.svg" : "/darksearch.svg"}
                 alt="search-icon"
-                width={20}
-                height={20}
+                width={16}
+                height={16}
               />
             </div>
             <input
               type="text"
               placeholder="Search"
-              className="px-2 placeholder:text-gray-300 bg-transparent border-none outline-none text-[16px]"
+              className={`px-2 ${
+                theme === "dark"
+                  ? " placeholder:text-white/40"
+                  : "placeholder:text-gray-300"
+              } bg-transparent border-none outline-none text-[16px]`}
             />
             <div className="image-cont">
               <Image
-                src={"/search2.svg"}
-                alt="search-icon"
+                src={theme === "light" ? "/search2.svg" : "/search2dark.svg"}
+                alt="search-2-icon"
                 width={20}
                 height={20}
               />
@@ -532,26 +578,52 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           </div>
 
           <div className="toggle-section flex items-center justify-center gap-4">
+            <button onClick={toggleTheme} className="w-[6rem]">
+              {theme === "dark" ? (
+                <Image
+                  src={"/darkbutton.svg"}
+                  alt="toggle-button-icon"
+                  width={25}
+                  height={25}
+                />
+              ) : (
+                <Image
+                  src={"/lightbutton.svg"}
+                  alt="toggle-button-icon"
+                  width={25}
+                  height={25}
+                />
+              )}
+            </button>
+
+            {theme === "dark" ? (
+              <Image
+                src={"/timerlight.svg"}
+                alt="timer-icon"
+                width={25}
+                height={25}
+              />
+            ) : (
+              <Image
+                src={"/timer.svg"}
+                alt="timer-icon"
+                width={25}
+                height={25}
+              />
+            )}
+
             <Image
-              src={"/lightbutton.svg"}
-              alt="toggle-button-icon"
-              width={25}
-              height={25}
-            />
-            <Image
-              src={"/timer.svg"}
-              alt="search-icon"
-              width={25}
-              height={25}
-            />
-            <Image
-              src={"/notifications.svg"}
+              src={
+                theme === "dark"
+                  ? "/notificationslight.svg"
+                  : "/notifications.svg"
+              }
               alt="notification toggle-icon"
               width={20}
               height={20}
             />
             <Image
-              src={"/book.svg"}
+              src={theme === "dark" ? "/booklight.svg" : "/book.svg"}
               alt="svg-component"
               width={30}
               height={30}
@@ -562,13 +634,25 @@ const Main = ({ setToggle, toggle }: MainProps) => {
 
       <div className="main-container md:px-[2rem] px-[1rem] py-[2rem]">
         <section className="overview flex items-center justify-between">
-          <span className="block font-semibold md:text-[1.25rem] text-[1rem]">
+          <span
+            className={`block font-semibold ${
+              theme === "dark" ? "text-white" : "text-black"
+            } md:text-[1.25rem] text-[1rem]`}
+          >
             Overview
           </span>
           <div className="item-container cursor-pointer flex items-center gap-2">
-            <small className="block">Today</small>
+            <small
+              className={`block ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
+            >
+              Today
+            </small>
             <Image
-              src={"/selectarrow.svg"}
+              src={
+                theme === "light" ? "/selectarrow.svg" : "/selectarrowlight.svg"
+              }
               alt="select-arrow"
               width={20}
               height={20}
@@ -580,7 +664,9 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           {itemsArray.map((item) => (
             <div
               key={item.name}
-              className={`card-item md:px-[1rem] items-center justify-center px-[1.4rem] md:py-[2rem] py-0 ${item.color} rounded-[23px]`}
+              className={`card-item md:px-[1rem] items-center justify-center px-[1.4rem] md:py-[2rem] py-0 ${
+                theme === "light" ? item.color : item.lightColor
+              } rounded-[23px]`}
               style={{ flex: "1 190px", minWidth: "190px", width: "100%" }} // Full width on mobile, individual width on larger screens
             >
               <span className="block cursor-default hover:translate-x-1 transition-all delay-75 ease-in-out mb-[.8rem] text-[1rem] text-black">
@@ -610,45 +696,25 @@ const Main = ({ setToggle, toggle }: MainProps) => {
 
         <section className="chart-section mt-[4rem]">
           <div className="first-chart-section flex items-start justify-between md:flex-row flex-col">
-            <div className="card-container mb-5 py-5 px-6 block min-h-[25rem] md:w-[74%] w-full rounded-[13px] bg-gray-100">
-              {/* <div className="title-container flex items-start gap-3">
-                <small className="block font-bold text-[1rem]">
-                  Total Users
-                </small>
-                <small className="block text-[1rem] text-black/40">
-                  Total Listings
-                </small>
-                <span className="block text-gray-300">|</span>
-                <div className="text-container flex items-center gap-1">
-                  <Image
-                    src={"/today.svg"}
-                    alt="time-icon"
-                    width={29}
-                    height={29}
-                  />
-
-                  <span className="block text-[.8rem] text-black">Today</span>
-                </div>
-                <div className="text-container flex items-center gap-1">
-                  <Image
-                    src={"/thismonth.svg"}
-                    alt="time-icon"
-                    width={29}
-                    height={29}
-                  />
-
-                  <span className="block text-[.8rem] text-black">
-                    This Month
-                  </span>
-                </div>
-              </div> */}
-
+            <div
+              className={`mb-5 py-5 px-6 block min-h-[25rem] md:w-[74%] w-full rounded-[13px]  ${
+                theme === "light" ? "bg-gray-100" : "bg-white/10"
+              }`}
+            >
               <div style={lineChartContainerStyle}>
                 <Line data={lineChartData} options={lineChartOptions} />
               </div>
             </div>
-            <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[24%] w-full rounded-[13px] bg-gray-100">
-              <small className="block font-bold text-[1rem]">
+            <div
+              className={`py-5 px-6 block min-h-[25rem] md:w-[24%] w-full rounded-[13px]  ${
+                theme === "light" ? "bg-gray-100" : "bg-white/10"
+              }`}
+            >
+              <small
+                className={`block font-bold text-[1rem] ${
+                  theme === "light" ? "text-black" : "text-white"
+                }`}
+              >
                 Traffic by Website
               </small>
 
@@ -659,11 +725,17 @@ const Main = ({ setToggle, toggle }: MainProps) => {
                       key={item.name}
                       className="item-card flex items-center gap-4"
                     >
-                      <span className="block">{item.name}</span>
+                      <span
+                        className={`block ${
+                          theme === "light" ? "text-black" : "text-white"
+                        }`}
+                      >
+                        {item.name}
+                      </span>
 
                       <div className="icon-container  flex items-end justify-end">
                         <Image
-                          src={item.icon}
+                          src={theme === "light" ? item.icon : item.dark}
                           alt={item.name}
                           width={120}
                           height={80}
@@ -678,14 +750,23 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           </div>
 
           <div className="second-chart-section mt-[4rem] flex items-start justify-between gap-7 md:flex-row flex-col">
-            <div className="card-container mb-5 py-5 px-6 block min-h-[20rem] md:w-[50%] w-full rounded-[13px] bg-gray-100">
+            <div
+              className={`card-container
+                ${
+                  theme === "light" ? "bg-gray-100" : "bg-white/10"
+                } mb-5 py-5 px-6 block min-h-[20rem] md:w-[50%] w-full rounded-[13px] bg-gray-100`}
+            >
               <div className="title-container">
                 <div style={chartContainerStyle}>
                   <Bar data={chartData} options={options} />
                 </div>
               </div>
             </div>
-            <div className="card-container py-5 px-6 block min-h-[21.3rem] md:w-[50%] w-full rounded-[13px] bg-gray-100">
+            <div
+              className={`card-container ${
+                theme === "light" ? "bg-gray-100" : "bg-white/10"
+              } py-5 px-6 block min-h-[21.3rem] md:w-[50%] w-full rounded-[13px] bg-gray-100`}
+            >
               <div className="title-container flex items-start gap-3">
                 <div style={pieChartContainerStyle}>
                   <Doughnut
