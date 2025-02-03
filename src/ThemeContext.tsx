@@ -28,12 +28,22 @@ export const useTheme = (): ThemeContextType => {
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState<string>(
-    localStorage.getItem("theme") || "dark"
-  );
+  const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
-    localStorage.setItem("theme", theme);
+    if (typeof window !== "undefined") {
+      // Check if localStorage is available
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", theme);
+    }
   }, [theme]);
 
   const toggleTheme = () => {
