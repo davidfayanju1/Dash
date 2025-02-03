@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -108,21 +108,15 @@ const Main = ({ setToggle, toggle }: MainProps) => {
   });
 
   const [pieData] = useState({
-    labels: ["Linux", "Mac", "IOS", "Windows", "Android", "Other"],
+    labels: ["London", "Manchester", "Wigan", "Bristol"],
     datasets: [
       {
         label: "Traffic by Location",
-        data: [15000, 40000, 20000, 35000, 5000, 27000],
-        backgroundColor: [
-          "#9F9FF8",
-          "#96E2D6",
-          "#000000",
-          "#92BFFF",
-          "#AEC7ED",
-          "#94E9B8",
-        ],
-        borderWidth: 0,
-        borderRadius: 13,
+        data: [52.1, 22.8, 13.9, 11.2],
+        backgroundColor: ["#000000", "#9F9FF8", "#96E2D6", "#92BFFF"],
+        borderColor: "#F7F7F7",
+        borderWidth: 3,
+        borderRadius: 7,
       },
     ],
   });
@@ -135,6 +129,12 @@ const Main = ({ setToggle, toggle }: MainProps) => {
       legend: {
         display: boolean;
         position: "top" | "center" | "right" | "bottom" | "left" | "chartArea";
+
+        labels: {
+          usePointStyle: boolean;
+          pointStyle: "circle";
+          generateLabels: (chart: any) => any[];
+        };
       };
       title: {
         display: boolean;
@@ -155,13 +155,36 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     plugins: {
       legend: {
         display: true,
-        position: "top",
+        position: "right",
+        labels: {
+          usePointStyle: true,
+          pointStyle: "circle", // Use circles for legend markers
+          generateLabels: (chart: any) => {
+            const data = chart.data;
+            if (data.labels && data.datasets.length) {
+              return data.labels.map((label: string, i: number) => {
+                const dataset = data.datasets[0];
+                const value = dataset.data[i];
+                const backgroundColor = dataset.backgroundColor[i];
+                return {
+                  text: `${label.padEnd(20, " ")}${value}%`, // Display label with percentage
+                  fillStyle: backgroundColor,
+                  hidden: false,
+                  index: i,
+                  strokeStyle: "transparent",
+                  pointStyle: "circle",
+                };
+              });
+            }
+            return [];
+          },
+        },
       },
       title: {
         display: true,
         text: "Traffic by Location",
         font: {
-          family: "Arial",
+          family: "Inter",
           size: 16,
           style: "normal",
           weight: "bold",
@@ -169,7 +192,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         color: "#000000",
         padding: {
           top: 10,
-          bottom: 20,
+          bottom: 40,
         },
       },
     },
@@ -177,7 +200,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
 
   const pieChartContainerStyle = {
     width: "100%",
-    height: "350px", // Set a larger height for a bigger Pie Chart
+    height: "250px", // Set a larger height for a bigger Pie Chart
     backgroundColor: "transparent",
   };
 
@@ -238,7 +261,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           size: 16,
           weight: "bold",
           style: "normal",
-          family: "Arial",
+          family: "Inter",
         } as any,
         color: "#000000",
         padding: {
@@ -256,6 +279,25 @@ const Main = ({ setToggle, toggle }: MainProps) => {
     width: "100%",
     minHeight: "300px", // Set minimum height to ensure visibility
   };
+
+  const chartRef = useRef<ChartJS<"doughnut">>(null);
+
+  useEffect(() => {
+    if (chartRef.current) {
+      const chart = chartRef.current;
+
+      const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height);
+      gradient.addColorStop(0, "#000000");
+      gradient.addColorStop(0.5, "#242424");
+      gradient.addColorStop(1, "#827f7f");
+
+      // Ensure backgroundColor is treated as an array of colors
+      if (Array.isArray(chart.data.datasets[0].backgroundColor)) {
+        chart.data.datasets[0].backgroundColor[0] = gradient;
+      }
+      chart.update();
+    }
+  }, []);
 
   return (
     <main className="bg-white min-h-screen">
@@ -439,18 +481,22 @@ const Main = ({ setToggle, toggle }: MainProps) => {
             </div>
           </div>
 
-          <div className="second-chart-section mt-[4rem] flex items-start justify-between md:flex-row flex-col">
-            <div className="card-container mb-5 py-5 px-6 block min-h-[25rem] md:w-[34%] w-full rounded-[13px] bg-gray-100">
+          <div className="second-chart-section mt-[4rem] flex items-start justify-between gap-7 md:flex-row flex-col">
+            <div className="card-container mb-5 py-5 px-6 block min-h-[20rem] md:w-[50%] w-full rounded-[13px] bg-gray-100">
               <div className="title-container">
                 <div style={chartContainerStyle}>
                   <Bar data={chartData} options={options} />
                 </div>
               </div>
             </div>
-            <div className="card-container py-5 px-6 block min-h-[25rem] md:w-[64%] w-full rounded-[13px] bg-gray-100">
+            <div className="card-container py-5 px-6 block min-h-[21.3rem] md:w-[50%] w-full rounded-[13px] bg-gray-100">
               <div className="title-container flex items-start gap-3">
                 <div style={pieChartContainerStyle}>
-                  <Doughnut data={pieData} options={pieOptions} />
+                  <Doughnut
+                    ref={chartRef}
+                    data={pieData}
+                    options={pieOptions}
+                  />
                 </div>
               </div>
             </div>
