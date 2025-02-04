@@ -15,6 +15,7 @@ import {
 } from "chart.js";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { useTheme } from "@/ThemeContext";
+import Digits from "./Digits";
 ChartJS.register(
   PointElement,
   LineElement,
@@ -686,7 +687,9 @@ const Main = ({ setToggle, toggle }: MainProps) => {
               </span>
               <div className="flex-container flex items-center justify-between gap-3">
                 <span className="block font-semibold text-black md:text-[1.75vw] text-[1.5rem]">
-                  {item.amount}
+                  {item.amount.split("").map((digit, index) => (
+                    <Digits key={index} digit={digit} />
+                  ))}
                 </span>
 
                 <div className="arrow-container flex items-center gap-3">
