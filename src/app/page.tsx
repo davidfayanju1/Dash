@@ -17,7 +17,7 @@ export default function Home() {
           className={`dash-container min-h-screen flex items-start justify-center relative`}
         >
           {/* Sidebar for larger screens */}
-          <div className="aside-container w-[16rem] h-screen overflow-y-scroll no-scrollbar fixed top-0 left-0 lg:block hidden">
+          <div className="aside-container w-[16rem] h-screen overflow-y-scroll no-scrollbar fixed z-50 top-0 left-0 lg:block hidden">
             <RAside />
           </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 type DigitProp = {
   digit: string;
@@ -7,19 +7,21 @@ type DigitProp = {
 const Digits = ({ digit }: DigitProp) => {
   const [hovered, setHovered] = useState(false);
 
-  const handleMouseOver = () => {
+  useEffect(() => {
     setHovered(true);
-  };
 
-  const handleAnimationEnd = () => {
-    setHovered(false);
-  };
+    const timer = setTimeout(() => {
+      setHovered(false);
+    }, 1000); // Duration of your animation
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <span
       className={`digit ${hovered ? "hovered" : ""}`}
-      onMouseOver={handleMouseOver}
-      onAnimationEnd={handleAnimationEnd}
+      onMouseOver={() => setHovered(true)}
+      onAnimationEnd={() => setHovered(false)}
     >
       {digit}
     </span>

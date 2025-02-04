@@ -15,11 +15,16 @@
   }
 }
 
+.aside-container {
+  z-index: 30000;
+}
+
 .digit {
   display: inline-block;
   cursor: pointer;
   position: relative;
   transition: transform 0.3s ease-in-out;
+  z-index: 1;
 }
 
 .digit.hovered {
