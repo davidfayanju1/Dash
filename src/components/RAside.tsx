@@ -59,18 +59,22 @@ const RAside = () => {
     {
       name: "Account",
       icon: "/account.svg",
+      iconII: "/accountdark.svg",
     },
     {
       name: "Corporate",
       icon: "/corporate.svg",
+      iconII: "/corporatedark.svg",
     },
     {
       name: "Blog",
       icon: "/blog.svg",
+      iconII: "/blogdark.svg",
     },
     {
       name: "Social",
       icon: "/social.svg",
+      iconII: "/socialdark.svg",
     },
   ];
   const { theme } = useTheme();
@@ -81,7 +85,7 @@ const RAside = () => {
         theme === "dark"
           ? "bg-black/80 border-gray-600"
           : "bg-white border-gray-200"
-      } min-h-screen border-r-[1px] border-gray-200`}
+      } min-h-screen border-r-[1px] `}
     >
       <section className="logo-container py-[1.4rem] flex items-center gap-3">
         <Image
@@ -161,7 +165,11 @@ const RAside = () => {
             >
               {!item.active && (
                 <Image
-                  src={"/arrowright.svg"}
+                  src={
+                    theme === "light"
+                      ? "/arrowright.svg"
+                      : "/arrowrightdark.svg"
+                  }
                   alt={item.name}
                   width={25}
                   height={30}
@@ -206,7 +214,7 @@ const RAside = () => {
             >
               {item.iconII && (
                 <Image
-                  src={item.iconII}
+                  src={theme === "light" ? item.iconII : "/arrowrightdark.svg"}
                   alt={item.name}
                   width={25}
                   height={30}
@@ -216,7 +224,7 @@ const RAside = () => {
               <div className="link-container flex items-center gap-2">
                 {item.icon && (
                   <Image
-                    src={item.icon}
+                    src={theme === "light" ? item.icon : "/flaggeddark.svg"}
                     alt={item.name}
                     width={30}
                     height={30}
@@ -252,7 +260,12 @@ const RAside = () => {
             />
 
             <div className="link-container flex items-center gap-2">
-              <Image src={item.icon} alt={item.name} width={30} height={30} />
+              <Image
+                src={theme === "light" ? item.icon : item.iconII}
+                alt={item.name}
+                width={30}
+                height={30}
+              />
               <span
                 className={`block  ${
                   theme === "dark" ? "text-white" : "text-black"

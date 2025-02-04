@@ -513,7 +513,11 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         theme === "dark" ? "bg-black/80" : "bg-white"
       }`}
     >
-      <nav className="nav-container md:px-[2rem] px-[1rem] py-[1.4rem] border-b-[1px] border-gray-200 flex items-center justify-between">
+      <nav
+        className={`nav-container md:px-[2rem] px-[1rem] py-[1.4rem] border-b-[1px] flex items-center justify-between ${
+          theme === "dark" ? "border-gray-600" : "border-gray-200"
+        }`}
+      >
         <div className="first-item-container flex items-center gap-3  h-full">
           <button onClick={() => setToggle(!toggle)} className="outline-none">
             <Image
@@ -545,11 +549,11 @@ const Main = ({ setToggle, toggle }: MainProps) => {
             </span>
           </small>
         </div>
-        <div className="second-item-container  hidden md:flex items-center justify-center gap-3">
+        <div className="second-item-container flex items-center justify-center gap-3">
           <div
             className={`search-input mr-[4rem] px-[.8rem]  ${
               theme === "light" ? "bg-gray-100" : "bg-white/10"
-            } h-[2.5rem] rounded-[9px] flex items-center w-[70%]`}
+            } h-[2.5rem] rounded-[9px] md:flex !hidden items-center w-[70%]`}
           >
             <div className="image-container">
               <Image
@@ -579,56 +583,63 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           </div>
 
           <div className="toggle-section flex items-center justify-center gap-4">
-            <button onClick={toggleTheme} className="w-[6rem]">
+            <div onClick={toggleTheme}>
               {theme === "dark" ? (
                 <Image
                   src={"/darkbutton.svg"}
                   alt="toggle-button-icon"
-                  width={25}
-                  height={25}
+                  width={35}
+                  height={35}
                 />
               ) : (
                 <Image
                   src={"/lightbutton.svg"}
                   alt="toggle-button-icon"
-                  width={25}
-                  height={25}
+                  width={35}
+                  height={35}
                 />
               )}
-            </button>
+            </div>
 
-            {theme === "dark" ? (
-              <Image
-                src={"/timerlight.svg"}
-                alt="timer-icon"
-                width={25}
-                height={25}
-              />
-            ) : (
-              <Image
-                src={"/timer.svg"}
-                alt="timer-icon"
-                width={25}
-                height={25}
-              />
-            )}
+            <div className="timer-container md:block hidden">
+              {theme === "dark" ? (
+                <Image
+                  src={"/timerlight.svg"}
+                  alt="timer-icon"
+                  width={35}
+                  height={35}
+                />
+              ) : (
+                <Image
+                  src={"/timer.svg"}
+                  alt="timer-icon"
+                  width={35}
+                  height={35}
+                />
+              )}
+            </div>
 
-            <Image
-              src={
-                theme === "dark"
-                  ? "/notificationslight.svg"
-                  : "/notifications.svg"
-              }
-              alt="notification toggle-icon"
-              width={20}
-              height={20}
-            />
-            <Image
-              src={theme === "dark" ? "/booklight.svg" : "/book.svg"}
-              alt="svg-component"
-              width={30}
-              height={30}
-            />
+            <div className="notifications-container md:block hidden">
+              <Image
+                src={
+                  theme === "dark"
+                    ? "/notificationslight.svg"
+                    : "/notifications.svg"
+                }
+                alt="notification toggle-icon"
+                width={30}
+                height={30}
+              />
+            </div>
+
+            <div className="booklight-container md:block hidden">
+              <Image
+                src={theme === "dark" ? "/booklight.svg" : "/book.svg"}
+                alt="svg-component"
+                width={30}
+                height={30}
+              />
+            </div>
           </div>
         </div>
       </nav>
