@@ -509,7 +509,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
 
   return (
     <main
-      className={` min-h-screen ${
+      className={`min-h-screen ${
         theme === "dark" ? "bg-black/80" : "bg-white"
       }`}
     >
