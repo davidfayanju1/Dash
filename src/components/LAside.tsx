@@ -89,7 +89,7 @@ const LAside = () => {
         theme === "dark"
           ? "bg-black/80 border-gray-600"
           : "bg-white border-gray-200"
-      } border-l-[1px] h-[129vh]`}
+      } border-l-[1px] h-[100vh]`}
     >
       <section className="section-container">
         <span
