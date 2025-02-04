@@ -551,9 +551,9 @@ const Main = ({ setToggle, toggle }: MainProps) => {
         </div>
         <div className="second-item-container flex items-center justify-center gap-3">
           <div
-            className={`search-input mr-[4rem] px-[.8rem]  ${
+            className={`search-input mr-[1rem] px-[.8rem]  ${
               theme === "light" ? "bg-gray-100" : "bg-white/10"
-            } h-[2.5rem] rounded-[9px] md:flex !hidden items-center w-[70%]`}
+            } h-[2.5rem] rounded-[9px] md:flex hidden items-center w-[70%]`}
           >
             <div className="image-container">
               <Image
