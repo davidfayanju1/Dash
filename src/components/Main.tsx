@@ -138,7 +138,7 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
           "#96E2D6",
           "#92BFFF",
         ],
-        borderColor: theme === "light" ? "#F7F7F7" : "#FFFFFF1A",
+        borderColor: theme === "light" ? "#F7F7F7" : "#7b78781a",
         borderWidth: 3,
         borderRadius: 7,
       },
