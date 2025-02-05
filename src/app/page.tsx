@@ -9,7 +9,7 @@ import { ThemeProvider } from "@/ThemeContext";
 
 export default function Home() {
   const [toggle, setToggle] = useState<boolean>(false);
-
+  const [toggleRight, setToggleRight] = useState<boolean>(false);
   return (
     <ThemeProvider>
       <>
@@ -44,12 +44,37 @@ export default function Home() {
 
           <div className="flex-container ml-0 lg:ml-[16rem] min-h-screen w-full flex items-start justify-start md:flex-row flex-col">
             <div className="w-full lg:w-[calc(100%-16rem)] xl:w-[calc(100%-16rem)] min-h-[100vh]">
-              <Main setToggle={setToggle} toggle={toggle} />
+              <Main
+                setToggle={setToggle}
+                toggle={toggle}
+                setToggleRight={setToggleRight}
+              />
             </div>
             <div className="fixed overflow-y-scroll top-0 right-0 custom:block hidden w-[16rem] h-screen no-scrollbar">
               <LAside />
             </div>
           </div>
+
+          {/* Overlay and Animated Sidebar for mobile (LAside) */}
+          {toggleRight && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="fixed inset-0 bg-black xl:hidden"
+              onClick={() => setToggleRight(false)}
+            />
+          )}
+          <motion.div
+            initial={{ x: "100%" }} // Start off-screen to the right
+            animate={{ x: toggleRight ? 0 : "100%" }} // Animate to visible or hidden
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }} // Set the duration and easing of the animation
+            className="aside-container overflow-y-scroll w-[16rem] h-screen no-scrollbar fixed top-0 right-0 block xl:hidden"
+          >
+            <LAside />
+          </motion.div>
         </div>
       </>
     </ThemeProvider>

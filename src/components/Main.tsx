@@ -30,9 +30,10 @@ ChartJS.register(
 interface MainProps {
   toggle: boolean;
   setToggle: (value: boolean) => void;
+  setToggleRight: (value: boolean) => void;
 }
 
-const Main = ({ setToggle, toggle }: MainProps) => {
+const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
   const { theme, toggleTheme } = useTheme();
 
   const itemsArray = [
@@ -620,7 +621,10 @@ const Main = ({ setToggle, toggle }: MainProps) => {
               )}
             </div>
 
-            <div className="notifications-container cursor-pointer">
+            <div
+              onClick={() => setToggleRight(true)}
+              className="notifications-container cursor-pointer"
+            >
               <Image
                 src={
                   theme === "dark"
