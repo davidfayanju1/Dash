@@ -510,7 +510,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
 
   return (
     <main
-      className={`min-h-screen ${
+      className={`min-h-screen w-full ${
         theme === "dark" ? "bg-black/80" : "bg-white"
       }`}
     >
@@ -620,7 +620,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
               )}
             </div>
 
-            <div className="notifications-container md:block hidden">
+            <div className="notifications-container cursor-pointer">
               <Image
                 src={
                   theme === "dark"
@@ -628,15 +628,6 @@ const Main = ({ setToggle, toggle }: MainProps) => {
                     : "/notifications.svg"
                 }
                 alt="notification toggle-icon"
-                width={30}
-                height={30}
-              />
-            </div>
-
-            <div className="booklight-container md:block hidden">
-              <Image
-                src={theme === "dark" ? "/booklight.svg" : "/book.svg"}
-                alt="svg-component"
                 width={30}
                 height={30}
               />

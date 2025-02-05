@@ -4,7 +4,7 @@ import LAside from "@/components/LAside";
 import Main from "@/components/Main";
 import RAside from "@/components/RAside";
 import { useState } from "react";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
 import { ThemeProvider } from "@/ThemeContext";
 
 export default function Home() {
@@ -43,10 +43,10 @@ export default function Home() {
           </motion.div>
 
           <div className="flex-container ml-0 lg:ml-[16rem] min-h-screen w-full flex items-start justify-start md:flex-row flex-col">
-            <div className="md:w-[80%] w-full min-h-[100vh]">
+            <div className="w-full lg:w-[calc(100%-16rem)] xl:w-[calc(100%-16rem)] min-h-[100vh]">
               <Main setToggle={setToggle} toggle={toggle} />
             </div>
-            <div className="md:w-[20%] w-full">
+            <div className="fixed overflow-y-scroll top-0 right-0 custom:block hidden w-[16rem] h-screen no-scrollbar">
               <LAside />
             </div>
           </div>
