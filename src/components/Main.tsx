@@ -536,7 +536,7 @@ const Main = ({ setToggle, toggle }: MainProps) => {
           />
 
           <small
-            className={`block ${
+            className={`md:block hidden ${
               theme === "dark" ? "text-white/40" : "text-black/40"
             }`}
           >
