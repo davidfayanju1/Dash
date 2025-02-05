@@ -355,13 +355,13 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
     }
   }, [theme]);
 
-  const [lineChartData] = useState({
+  const getLineChartData = (theme: any) => ({
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
         label: "This Month",
         data: [10000, 15000, 25000, 20000, 30000, 18000, 23000],
-        borderColor: "#000000",
+        borderColor: theme === "light" ? "#000000" : "#FFFFFF",
         backgroundColor: "#9F9FF8",
         fill: true,
         pointRadius: 0,
@@ -370,6 +370,8 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
       },
     ],
   });
+
+  const lineChartData = getLineChartData(theme);
 
   type LineChartOptions = {
     responsive: boolean;
