@@ -157,6 +157,7 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
         labels: {
           usePointStyle: boolean;
           pointStyle: "circle";
+          color: string;
           generateLabels: (chart: any) => any[];
         };
       };
@@ -183,7 +184,7 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
         labels: {
           usePointStyle: true,
           pointStyle: "circle", // Use circles for legend markers
-
+          color: theme === "dark" ? "#FFFFFF" : "#000000",
           generateLabels: (chart: any) => {
             const data = chart.data;
             if (data.labels && data.datasets.length) {
@@ -198,6 +199,7 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
                   index: i,
                   strokeStyle: "transparent",
                   pointStyle: "circle",
+                  fontColor: theme === "dark" ? "#FFFFFF" : "#000000",
                 };
               });
             }
@@ -576,14 +578,14 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
                   : "placeholder:text-gray-300"
               } bg-transparent border-none outline-none text-[16px]`}
             />
-            <div className="image-cont">
+            {/* <div className="image-cont">
               <Image
                 src={theme === "light" ? "/search2.svg" : "/search2dark.svg"}
                 alt="search-2-icon"
                 width={20}
                 height={20}
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="toggle-section flex items-center justify-center gap-4">
