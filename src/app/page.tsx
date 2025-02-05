@@ -28,7 +28,7 @@ export default function Home() {
               animate={{ opacity: 0.5 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed inset-0 bg-black md:hidden"
+              className="fixed inset-0 bg-black xl:hidden"
               onClick={() => setToggle(false)}
             />
           )}
@@ -37,7 +37,7 @@ export default function Home() {
             animate={{ x: toggle ? 0 : "-100%" }} // Animate to visible or hidden
             exit={{ x: "-100%" }}
             transition={{ duration: 0.4, ease: "easeInOut" }} // Set the duration and easing of the animation
-            className="aside-container overflow-y-scroll w-[16rem] h-screen no-scrollbar fixed top-0 left-0 block md:hidden"
+            className="aside-container overflow-y-scroll w-[16rem] h-screen no-scrollbar fixed top-0 left-0 block xl:hidden"
           >
             <RAside />
           </motion.div>
