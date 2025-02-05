@@ -126,7 +126,7 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
     ],
   });
 
-  const [pieData] = useState({
+  const getPieChartData = (theme: string) => ({
     labels: ["London", "Manchester", "Wigan", "Bristol"],
     datasets: [
       {
@@ -138,12 +138,14 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
           "#96E2D6",
           "#92BFFF",
         ],
-        borderColor: theme === "light" ? "#F7F7F7" : "#7b78781a",
+        borderColor: theme === "light" ? "#F7F7F7" : "#4543431a",
         borderWidth: 3,
         borderRadius: 7,
       },
     ],
   });
+
+  const pieData = getPieChartData(theme);
 
   type pieChartOptions = {
     responsive: boolean;
@@ -357,7 +359,7 @@ const Main = ({ setToggle, toggle, setToggleRight }: MainProps) => {
     }
   }, [theme]);
 
-  const getLineChartData = (theme: any) => ({
+  const getLineChartData = (theme: string) => ({
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
