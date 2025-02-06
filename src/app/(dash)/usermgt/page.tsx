@@ -3,7 +3,6 @@ import TableComp from "@/components/reusable/TableComp";
 import { useTheme } from "@/ThemeContext";
 import Image from "next/image";
 import React from "react";
-import DataTable from "react-data-table-component";
 
 const UserMgt = () => {
   const columns = [

@@ -1,19 +1,13 @@
 import React from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
-import styled from "styled-components";
 import { TbCancel } from "react-icons/tb";
 
 interface TableCompProps {
   columns: TableColumn<any>[];
   data: any[];
-  subHeaderComponent?: React.ReactNode;
 }
 
-const TableComp: React.FC<TableCompProps> = ({
-  columns,
-  data = [],
-  subHeaderComponent,
-}) => {
+const TableComp: React.FC<TableCompProps> = ({ columns, data = [] }) => {
   const customStyles = {
     table: {
       style: {
