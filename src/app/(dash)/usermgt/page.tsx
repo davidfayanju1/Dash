@@ -16,13 +16,11 @@ const UserMgt = () => {
       selector: (row: any) => row.year,
       sortable: true,
     },
-
     {
       name: "Listings",
       selector: (row: any) => row.listings,
       sortable: true,
     },
-
     {
       name: "Listings(Lifetime)",
       selector: (row: any) => row.listingsLifetime,
@@ -50,7 +48,6 @@ const UserMgt = () => {
       totalMade: "$300.00",
       shopValue: "$500.00",
     },
-
     {
       id: 2,
       title: "Natalie Craig",
@@ -69,14 +66,13 @@ const UserMgt = () => {
       totalMade: "$409.00",
       shopValue: "$750.00",
     },
-    // Add more data here
   ];
 
   const { theme } = useTheme();
 
   return (
     <div
-      className={`page-container md:px-[2rem] px-[1rem] h-screen  ${
+      className={`page-container md:px-[2rem] px-[1rem] h-screen ${
         theme === "dark" ? "bg-black/80" : "bg-white"
       }`}
     >
