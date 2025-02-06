@@ -1,5 +1,6 @@
 import { useTheme } from "@/ThemeContext";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 const RAside = () => {
@@ -13,12 +14,17 @@ const RAside = () => {
     },
   ];
 
+  const pathname = usePathname();
+
+  console.log(pathname, "pathname");
+
   const dashboards = [
     {
       name: "Overview",
       icon: "/dashoverview.svg",
       dark: "/overviewdark.svg",
       active: true,
+      route: "/",
     },
 
     {
@@ -26,14 +32,18 @@ const RAside = () => {
       icon: "/usermgt.svg",
       active: false,
       dark: "/usermgtdark.svg",
+      route: "/usermgt",
     },
     {
       name: "Listings",
       icon: "/listings.svg",
       dark: "/listingsdark.svg",
       active: false,
+      route: "/listings",
     },
   ];
+
+  const router = useRouter();
 
   const reports = [
     {
@@ -154,16 +164,17 @@ const RAside = () => {
         <div className=" mt-4">
           {dashboards.map((item) => (
             <div
+              onClick={() => router.push(item.route)}
               key={item.name}
-              className={` ${
-                item.active === true
+              className={`${
+                item.route === pathname
                   ? ` ${
                       theme === "dark" ? "bg-white/10" : "bg-gray-200"
                     } px-8 py-2 rounded-[9px]`
                   : ""
               } cursor-pointer flex items-start justify-start mb-3 gap-2`}
             >
-              {!item.active && (
+              {item.route !== pathname && (
                 <Image
                   src={
                     theme === "light"
