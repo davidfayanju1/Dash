@@ -3,13 +3,27 @@
 import LAside from "@/components/LAside";
 import Main from "@/components/Main";
 import RAside from "@/components/RAside";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeProvider } from "@/ThemeContext";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleRight, setToggleRight] = useState<boolean>(false);
+  const router = useRouter();
+  const user = false;
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    } else {
+      toast.error("User not logged in");
+      router.push("/login");
+    }
+  }, [user]);
+
   return (
     <ThemeProvider>
       <>
