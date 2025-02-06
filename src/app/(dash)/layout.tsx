@@ -50,7 +50,10 @@ function Dashboard({ children }: DashLayoutProp) {
         <div className="flex-container ml-0 lg:ml-[16rem] min-h-screen w-full flex items-start justify-start md:flex-row flex-col">
           <div className="w-full lg:w-[calc(100%-16rem)] xl:w-[calc(100%-16rem)] min-h-[100vh]">
             <nav
-              className={`nav-container md:px-[2rem] px-[1rem] py-[1.4rem] border-b-[1px] flex items-center justify-between ${
+              className={`nav-container
+                ${
+                  theme === "dark" ? "bg-black/80" : "bg-white"
+                } md:px-[2rem] px-[1rem] py-[1.4rem] border-b-[1px] flex items-center justify-between ${
                 theme === "dark" ? "border-gray-600" : "border-gray-200"
               }`}
             >
