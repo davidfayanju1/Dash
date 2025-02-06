@@ -22,7 +22,7 @@ export default function Home() {
       toast.error("User not logged in");
       router.push("/login");
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <ThemeProvider>

@@ -1,7 +1,6 @@
 "use client";
 
 import LAside from "@/components/LAside";
-import Main from "@/components/Main";
 import RAside from "@/components/RAside";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
