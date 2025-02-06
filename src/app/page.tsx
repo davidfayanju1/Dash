@@ -12,7 +12,7 @@ export default function Home() {
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleRight, setToggleRight] = useState<boolean>(false);
   // const router = useRouter();
-  const user = false;
+  // const user = false;
 
   // useEffect(() => {
   //   if (user) {
