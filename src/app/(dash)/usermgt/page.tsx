@@ -8,13 +8,20 @@ const UserMgt = () => {
   const columns = [
     {
       name: "Username",
-      selector: (row: any) => row.title,
+      selector: (row: any) => (
+        <div className="item-container flex items-center gap-1">
+          <Image src={"/table.svg"} alt="user-icon" width={20} height={20} />
+          {row.title}
+        </div>
+      ),
       sortable: true,
+      width: "150px",
     },
     {
       name: "Date Joined",
       selector: (row: any) => row.year,
       sortable: true,
+      width: "120px",
     },
     {
       name: "Listings",
@@ -25,16 +32,19 @@ const UserMgt = () => {
       name: "Listings(Lifetime)",
       selector: (row: any) => row.listingsLifetime,
       sortable: true,
+      width: "150px",
     },
     {
       name: "Total made",
       selector: (row: any) => row.totalMade,
       sortable: true,
+      width: "120px",
     },
     {
       name: "Shop Value",
       selector: (row: any) => row.shopValue,
       sortable: true,
+      width: "120px",
     },
   ];
 
@@ -45,8 +55,8 @@ const UserMgt = () => {
       year: "Jun 24, 2025",
       listings: "15",
       listingsLifetime: "947",
-      totalMade: "$300.00",
-      shopValue: "$500.00",
+      totalMade: "£300.00",
+      shopValue: "£500.00",
     },
     {
       id: 2,
@@ -54,8 +64,8 @@ const UserMgt = () => {
       year: "Mar 10, 2025",
       listings: "25",
       listingsLifetime: "47",
-      totalMade: "$881.00",
-      shopValue: "$1025.00",
+      totalMade: "£881.00",
+      shopValue: "£1025.00",
     },
     {
       id: 3,
@@ -63,8 +73,8 @@ const UserMgt = () => {
       year: "Nov 10, 2025",
       listings: "35",
       listingsLifetime: "102",
-      totalMade: "$409.00",
-      shopValue: "$750.00",
+      totalMade: "£409.00",
+      shopValue: "£750.00",
     },
   ];
 

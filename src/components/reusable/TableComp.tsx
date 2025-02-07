@@ -33,7 +33,7 @@ const TableComp: React.FC<TableCompProps> = ({ columns, data = [] }) => {
         backgroundColor: theme === "light" ? "#FFFFFF" : "#000000CC",
         fontFamily: "Inter",
         fontWeight: 400,
-        color: theme === "dark" ? "#FFFFFF" : "#000000",
+        color: theme === "dark" ? "#D1D5DB" : "#a8acb1",
       },
     },
     subHeader: {
