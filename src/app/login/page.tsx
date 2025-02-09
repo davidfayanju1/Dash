@@ -5,6 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useMutation, gql } from "@apollo/client";
+import { toast } from "react-toastify";
+// import { BeatLoader } from "react-spinners";
+
+const LOGIN_MUTATION = gql`
+  mutation adminLogin($username: String!, $password: String!) {
+    adminLogin(username: $username, password: $password) {
+      token
+      message
+      user {
+        username
+      }
+    }
+  }
+`;
 
 const Loginpage = () => {
   const router = useRouter();
@@ -22,8 +37,35 @@ const Loginpage = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const handleLogin = () => {
-    router.push("/");
+  const [login, { data, error, loading }] = useMutation(LOGIN_MUTATION);
+
+  const handleLogin = async () => {
+    const { username, password } = user;
+
+    if(username === "" || password === "") {
+
+      toast.error("Enter Username or Password")
+
+    }
+
+    try {
+      const response = await login({ variables: { username, password } });
+
+
+      console.log({response})
+      
+      if (response && response.data && response.data.login) {
+        toast.success("Login Successful");
+        localStorage.setItem("token", response.data.login.token);
+        router.push("/");
+      } else {
+        toast.error("Unexpected response structure.");
+      }
+    } catch (err: any) {
+      toast.error(err.message);
+
+      console.log(err.message);
+    }
   };
 
   return (
@@ -55,7 +97,7 @@ const Loginpage = () => {
           <Input
             type="text"
             placeholder=""
-            label="Enter Text"
+            label="Enter Text (Optional)"
             handleChangeText={handleChangeText}
             value={user.text}
             containerStyle="mb-[2rem]"
@@ -66,7 +108,7 @@ const Loginpage = () => {
               onClick={handleLogin}
               className="bg-[#AB28B2] mb-[1.5rem] text-white font-semibold py-[.9rem] w-full rounded-[7px]"
             >
-              Login
+              {loading ? "Login..." : "Login"}
             </button>
 
             <Link
