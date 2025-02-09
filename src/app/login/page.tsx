@@ -37,23 +37,20 @@ const Loginpage = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const [login, { data, error, loading }] = useMutation(LOGIN_MUTATION);
+  const [login, { loading }] = useMutation(LOGIN_MUTATION);
 
   const handleLogin = async () => {
     const { username, password } = user;
 
-    if(username === "" || password === "") {
-
-      toast.error("Enter Username or Password")
-
+    if (username === "" || password === "") {
+      toast.error("Enter Username or Password");
     }
 
     try {
       const response = await login({ variables: { username, password } });
 
+      console.log({ response });
 
-      console.log({response})
-      
       if (response && response.data && response.data.login) {
         toast.success("Login Successful");
         localStorage.setItem("token", response.data.login.token);
