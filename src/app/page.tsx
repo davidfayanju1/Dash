@@ -12,16 +12,15 @@ const Home = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleRight, setToggleRight] = useState<boolean>(false);
   const router = useRouter();
-  const user = false;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("refreshToken") : null;
 
   useEffect(() => {
-    if (user) {
-      router.push("/");
-    } else {
+    if (!token) {
       toast.error("User not logged in");
       router.push("/login");
     }
-  }, [user, router]);
+  }, [token, router]);
 
   return (
     <>

@@ -7,13 +7,17 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { toast } from "react-toastify";
-// import { BeatLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 
 const LOGIN_MUTATION = gql`
   mutation adminLogin($username: String!, $password: String!) {
     adminLogin(username: $username, password: $password) {
       token
-      message
+      refreshToken
+      refreshExpiresIn
+      payload
+      success
+      refreshToken
       user {
         username
       }
@@ -51,9 +55,17 @@ const Loginpage = () => {
 
       console.log({ response });
 
-      if (response && response.data && response.data.login) {
+      if (response) {
         toast.success("Login Successful");
-        localStorage.setItem("token", response.data.login.token);
+        localStorage.setItem(
+          "token",
+          JSON.stringify(response.data.adminLogin.token)
+        );
+        localStorage.setItem(
+          "refreshToken",
+          JSON.stringify(response.data.adminLogin.refreshToken)
+        );
+
         router.push("/");
       } else {
         toast.error("Unexpected response structure.");
@@ -103,9 +115,14 @@ const Loginpage = () => {
           <div className="button-container">
             <button
               onClick={handleLogin}
-              className="bg-[#AB28B2] mb-[1.5rem] text-white font-semibold py-[.9rem] w-full rounded-[7px]"
+              className="bg-[#AB28B2] disabled:bg-[#AB28B2]/30 mb-[1.5rem] text-white font-semibold py-[.9rem] w-full rounded-[7px]"
+              disabled={loading}
             >
-              {loading ? "Login..." : "Login"}
+              {loading ? (
+                <BeatLoader color="#FFFFFF" loading={true} size={20} />
+              ) : (
+                "Login"
+              )}
             </button>
 
             <Link
