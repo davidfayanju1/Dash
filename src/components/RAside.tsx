@@ -2,8 +2,9 @@ import { useTheme } from "@/ThemeContext";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
+import { IoLogOutOutline } from "react-icons/io5";
 
-const RAside = () => {
+const RAside = ({ handleLogout }: any) => {
   const listing = [
     {
       name: "Overview",
@@ -287,6 +288,17 @@ const RAside = () => {
             </div>
           </div>
         ))}
+      </section>
+
+      <section
+        className={`logout-container hover:bg-gray-100 transition-all delay-75 ease-in-out px-2 py-1 rounded-[8px] md:w-[85%] mt-[4.5rem] ml-[.6rem] ${
+          theme === "light" ? "text-black" : "text-white"
+        }`}
+      >
+        <button className="flex items-center gap-3 outline-none">
+          <IoLogOutOutline color="gray" size={30} />
+          <span className="block">Logout</span>
+        </button>
       </section>
 
       <section className="company-logo-container flex items-center gap-2 mt-[10rem]">
