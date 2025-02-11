@@ -9,10 +9,11 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-// GraphQL mutation for logout
 const LOGOUT_MUTATION = gql`
-  mutation Logout {
-    logout
+  mutation logout($refreshToken: String!) {
+    logout(refreshToken: $refreshToken) {
+      message
+    }
   }
 `;
 
@@ -20,9 +21,11 @@ const Home = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleRight, setToggleRight] = useState<boolean>(false);
   const router = useRouter();
-  const [logout] = useMutation(LOGOUT_MUTATION);
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("refreshToken") : null;
+  const token = localStorage.getItem("refreshToken") || null;
+
+  console.log(token, "refreshToken");
+
+  const [logout, { loading }] = useMutation(LOGOUT_MUTATION);
 
   useEffect(() => {
     if (!token) {
@@ -33,13 +36,14 @@ const Home = () => {
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout({ variables: { refreshToken: JSON.parse(token ?? "") } });
       localStorage.removeItem("refreshToken");
       toast.success("Logged out successfully");
       router.push("/login");
     } catch (error) {
       console.error("Logout failed", error);
       toast.error("Logout failed");
+      console.log(error, "error");
     }
   };
 
@@ -50,9 +54,7 @@ const Home = () => {
       >
         {/* Sidebar for larger screens */}
         <div className="aside-container w-[16rem] h-screen overflow-y-scroll no-scrollbar fixed z-50 top-0 left-0 lg:block hidden">
-          <RAside
-            onLogout={handleLogout} // Add the logout handler to Main component
-          />
+          <RAside onLogout={handleLogout} loading={loading} />
         </div>
 
         {/* Overlay and Animated Sidebar for mobile */}
@@ -73,9 +75,7 @@ const Home = () => {
           transition={{ duration: 0.4, ease: "easeInOut" }} // Set the duration and easing of the animation
           className="aside-container overflow-y-scroll w-[16rem] h-screen no-scrollbar fixed top-0 left-0 block xl:hidden"
         >
-          <RAside
-            onLogout={handleLogout} // Add the logout handler to Main component
-          />
+          <RAside onLogout={handleLogout} loading={loading} />
         </motion.div>
 
         <div className="flex-container ml-0 lg:ml-[16rem] min-h-screen w-full flex items-start justify-start md:flex-row flex-col">

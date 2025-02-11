@@ -4,7 +4,12 @@ import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { IoLogOutOutline } from "react-icons/io5";
 
-const RAside = ({ handleLogout }: any) => {
+interface AsideInterface {
+  onLogout?: () => void;
+  loading?: boolean;
+}
+
+const RAside = ({ onLogout, loading }: AsideInterface) => {
   const listing = [
     {
       name: "Overview",
@@ -16,8 +21,6 @@ const RAside = ({ handleLogout }: any) => {
   ];
 
   const pathname = usePathname();
-
-  console.log(pathname, "pathname");
 
   const dashboards = [
     {
@@ -295,9 +298,16 @@ const RAside = ({ handleLogout }: any) => {
           theme === "light" ? "text-black" : "text-white"
         }`}
       >
-        <button className="flex items-center gap-3 outline-none">
+        <button
+          disabled={loading}
+          onClick={onLogout}
+          className="flex items-center gap-3 outline-none"
+        >
           <IoLogOutOutline color="gray" size={30} />
-          <span className="block">Logout</span>
+
+          <small className="block text-[1rem]">
+            {loading ? "Logging Out..." : "Logout"}
+          </small>
         </button>
       </section>
 
