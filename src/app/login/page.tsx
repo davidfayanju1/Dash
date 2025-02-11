@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import { loginClient } from "@/lib/apolloClient";
 
 const LOGIN_MUTATION = gql`
   mutation adminLogin($username: String!, $password: String!) {
@@ -41,7 +42,9 @@ const Loginpage = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const [login, { loading }] = useMutation(LOGIN_MUTATION);
+  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+    client: loginClient,
+  });
 
   const handleLogin = async () => {
     const { username, password } = user;
