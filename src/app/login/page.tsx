@@ -84,7 +84,7 @@ const Loginpage = () => {
     <div className="bg-[#AB28B2]/50 w-full min-h-screen flex items-center justify-center">
       <div className="page-items-container mx-auto my-[5rem] max-w-[31rem] w-[97%] min-h-[35rem]">
         <h1 className="font-semibold mb-2 text-[1rem] text-black">
-          Admin Login
+          Admin Login.
         </h1>
         <div className="box shadow-xl md:py-[3.5rem] py-[2.5rem] px-[1rem] md:px-[2rem] mb-[4rem] bg-white w-[100%] min-h-[30rem] rounded-[9px]">
           <Input
